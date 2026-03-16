@@ -8,7 +8,59 @@
  * ------------------------------------------------------------
  */
 {
-  "current": "Default",
+  "current": {
+    "color_primary": "#5C7285",
+    "color_on_primary": "#FFFFFF",
+    "color_background": "#FDFCFB",
+    "color_surface": "#F1F0EC",
+    "color_outline": "#E1E2E5",
+    "color_dark": "#1A1C1E",
+    "color_body_text": "#44474A",
+    "prototyper_enabled": true,
+    "prototyper_cta_text": "Get a Quote",
+    "prototyper_quote_text": "View Materials",
+    "printer_status": "idle",
+    "printer_status_custom": "Accepting new projects",
+    "total_prints_shipped": "1247",
+    "workbench_enabled": true,
+    "contact_email": "hello@example.com",
+    "contact_phone": "+44 7XXX XXXXXX",
+    "sections": {
+      "prototyper-bar": {
+        "type": "prototyper-bar",
+        "settings": {
+          "enable_bar": true,
+          "status_text": "PRINTERS ONLINE",
+          "status_color": "#2d6a4f",
+          "announcement": "Free shipping on orders over £50"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_width": 140,
+          "menu": "main-menu"
+        }
+      },
+      "designer-workbench": {
+        "type": "designer-workbench",
+        "settings": {
+          "enable_workbench": true,
+          "wb_subtitle": "We usually reply within a few hours",
+          "contact_email": "hello@example.com",
+          "contact_phone": "+44 7XXX XXXXXX",
+          "response_note": "We typically reply within 24 hours"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "tagline": "Precision 3D printing for creators, engineers, and dreamers."
+        }
+      }
+    },
+    "content_for_index": []
+  },
   "presets": {
     "Default": {
       "color_primary": "#5C7285",

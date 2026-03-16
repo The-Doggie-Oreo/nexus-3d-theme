@@ -134,40 +134,6 @@
             "best_for": "Prototypes, display models, low-stress parts"
           }
         },
-        "material_HFAe4M": {
-          "type": "material",
-          "settings": {
-            "name": "Resin (SLA)",
-            "type": "Photopolymer",
-            "accent_color": "#8b6f47",
-            "description": "The go-to material for prototyping. Biodegradable, easy to print, and available in many colors.",
-            "strength": 45,
-            "flexibility": 20,
-            "heat_resistance": 35,
-            "detail": 95,
-            "layer_min": "0.025mm",
-            "temp": "N/A",
-            "price_tier": "$$$",
-            "best_for": "Miniatures, jewelry, dental, high-detail prototypes"
-          }
-        },
-        "material_UHj8nD": {
-          "type": "material",
-          "settings": {
-            "name": "Nylon (PA12)",
-            "type": "FDM / SLS",
-            "accent_color": "#2d6a4f",
-            "description": "The go-to material for prototyping. Biodegradable, easy to print, and available in many colors.",
-            "strength": 90,
-            "flexibility": 75,
-            "heat_resistance": 80,
-            "detail": 55,
-            "layer_min": "0.1mm",
-            "temp": "250°C",
-            "price_tier": "$$$$",
-            "best_for": "Functional parts, hinges, snap-fits, gears"
-          }
-        },
         "material_rgGyCW": {
           "type": "material",
           "settings": {
@@ -188,8 +154,6 @@
       },
       "block_order": [
         "material_XKtKPh",
-        "material_HFAe4M",
-        "material_UHj8nD",
         "material_rgGyCW"
       ],
       "name": "Materials Lab",
@@ -197,11 +161,64 @@
         "heading": "The Material Lab",
         "subheading": "Deep-dive into every material we offer. Compare properties, discover what's best for your project."
       }
+    },
+    "section_faq_accordion_LCVN9Y": {
+      "type": "section-faq-accordion",
+      "blocks": {
+        "faq_VAtKgq": {
+          "type": "faq",
+          "settings": {
+            "question": "What file formats do you accept?",
+            "answer": "<p>We accept STL, OBJ, STEP, STP, 3MF, and most common 3D file formats. If you have a different format, just send it over and we'll convert it for you.</p>"
+          }
+        },
+        "faq_wTfbkP": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does 3D printing cost?",
+            "answer": "<p>Pricing depends on material, size, and complexity. Upload your file for an instant quote, or contact us for custom project pricing. Most small parts start around $15.</p>"
+          }
+        },
+        "faq_9fXxdU": {
+          "type": "faq",
+          "settings": {
+            "question": "What materials do you offer?",
+            "answer": "<p>We stock PLA, PETG, ABS, Nylon, TPU, and multiple SLA resins. Visit our Materials page for a full breakdown of properties and use cases.</p>"
+          }
+        },
+        "faq_Cpg9Dt": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Standard orders ship within 5-7 business days. Rush orders (2-3 days) and same-day service are available for an additional fee. We ship worldwide.</p>"
+          }
+        },
+        "faq_A69jTL": {
+          "type": "faq",
+          "settings": {
+            "question": "Can you paint or finish my print?",
+            "answer": "<p>Yes! We offer sanding, priming, and full paint services. Select your preferred finish level during checkout or specify details in the Design Notes field.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_VAtKgq",
+        "faq_wTfbkP",
+        "faq_9fXxdU",
+        "faq_Cpg9Dt",
+        "faq_A69jTL"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "subheading": "Everything you need to know about our 3D printing services."
+      }
     }
   },
   "order": [
     "hero",
     "portfolio",
-    "main_materials_EaNXbE"
+    "main_materials_EaNXbE",
+    "section_faq_accordion_LCVN9Y"
   ]
 }
