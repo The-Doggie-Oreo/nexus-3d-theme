@@ -10,12 +10,14 @@
       "color_dark": "#1A1C1E",
       "color_body_text": "#44474A",
       "prototyper_enabled": true,
-      "prototyper_cta_text": "Upload STL",
-      "prototyper_quote_text": "Request Quote",
+      "prototyper_cta_text": "Get a Quote",
+      "prototyper_quote_text": "View Materials",
       "printer_status": "idle",
       "printer_status_custom": "Accepting new projects",
       "total_prints_shipped": "1247",
-      "workbench_enabled": true
+      "workbench_enabled": true,
+      "contact_email": "hello@example.com",
+      "contact_phone": "+44 7XXX XXXXXX"
     }
   }
 }

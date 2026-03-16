@@ -16,10 +16,10 @@
         "heading": "PRECISION PRINTS. DELIVERED.",
         "subheading": "From prototype to production — engineered 3D printing for creators, engineers and businesses.",
         "show_search": true,
-        "cta_primary_text": "Get a Quote",
-        "cta_primary_link": "",
-        "cta_secondary_text": "Our Work",
-        "cta_secondary_link": ""
+        "cta_label": "Get a Quote",
+        "cta_link": "",
+        "cta2_label": "View Our Work",
+        "cta2_link": ""
       }
     },
     "trust-marquee": {

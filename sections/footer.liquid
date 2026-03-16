@@ -8,7 +8,22 @@
       <div class="nexus-footer__col nexus-footer__col--brand">
         <span class="nexus-footer__brand">{{ shop.name }}</span>
         <p class="nexus-footer__tagline">{{ section.settings.tagline | default: 'Precision 3D printing for creators, engineers, and dreamers.' }}</p>
-        <div class="nexus-footer__social">
+
+        {%- comment -%} Contact Info {%- endcomment -%}
+        {%- if settings.contact_email != blank -%}
+          <a href="mailto:{{ settings.contact_email }}" class="nexus-footer__contact-line">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            {{ settings.contact_email }}
+          </a>
+        {%- endif -%}
+        {%- if settings.contact_phone != blank -%}
+          <a href="tel:{{ settings.contact_phone | remove: ' ' }}" class="nexus-footer__contact-line">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            {{ settings.contact_phone }}
+          </a>
+        {%- endif -%}
+
+        <div class="nexus-footer__social" style="margin-top: 16px;">
           {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" class="nexus-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener">IG</a>{%- endif -%}
           {%- if settings.social_twitter != blank -%}<a href="{{ settings.social_twitter }}" class="nexus-footer__social-link" aria-label="Twitter" target="_blank" rel="noopener">X</a>{%- endif -%}
           {%- if settings.social_youtube != blank -%}<a href="{{ settings.social_youtube }}" class="nexus-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener">YT</a>{%- endif -%}
@@ -61,10 +76,17 @@
   .nexus-footer__tagline {
     font-size: .85rem;
     color: var(--nx-body);
-    margin: 12px 0 16px;
+    margin: 12px 0 12px;
     line-height: 1.5;
     max-width: 280px;
   }
+  .nexus-footer__contact-line {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--nx-font-mono); font-size: 12px;
+    color: var(--nx-body); text-decoration: none;
+    margin-bottom: 6px; transition: color .2s;
+  }
+  .nexus-footer__contact-line:hover { color: var(--nx-primary); }
   .nexus-footer__social { display: flex; gap: 8px; }
   .nexus-footer__social-link {
     font-family: var(--nx-font-mono);

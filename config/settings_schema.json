@@ -104,24 +104,24 @@
       {
         "type": "text",
         "id": "prototyper_cta_text",
-        "label": "Upload CTA Text",
-        "default": "Upload STL"
+        "label": "Primary CTA Text",
+        "default": "Get a Quote"
       },
       {
         "type": "text",
         "id": "prototyper_quote_text",
-        "label": "Quote CTA Text",
-        "default": "Request Quote"
+        "label": "Secondary CTA Text",
+        "default": "View Materials"
       },
       {
         "type": "url",
         "id": "prototyper_upload_url",
-        "label": "Upload Page URL"
+        "label": "Primary CTA Link"
       },
       {
         "type": "url",
         "id": "prototyper_quote_url",
-        "label": "Quote Page URL"
+        "label": "Secondary CTA Link"
       }
     ]
   },
@@ -187,23 +187,50 @@
     ]
   },
   {
-    "name": "Designer Workbench",
+    "name": "Contact Widget",
     "settings": [
       {
         "type": "header",
-        "content": "Integrated Messenger UI"
+        "content": "Floating Contact Panel"
       },
       {
         "type": "checkbox",
         "id": "workbench_enabled",
-        "label": "Enable Designer's Workbench Panel",
+        "label": "Enable Contact Widget",
         "default": true
       },
       {
         "type": "textarea",
         "id": "workbench_intro_text",
         "label": "Intro Message",
-        "default": "Welcome to the Designer's Workbench. Drop your files, track your project, and chat directly with our print engineers."
+        "default": "Get in touch — we'll help you choose the right material and get a quote for your project."
+      }
+    ]
+  },
+  {
+    "name": "Contact Information",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Your Contact Details"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Contact Email",
+        "default": "hello@example.com"
+      },
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Contact Phone",
+        "default": "+44 7XXX XXXXXX"
+      },
+      {
+        "type": "text",
+        "id": "contact_address",
+        "label": "Address (optional)",
+        "default": ""
       }
     ]
   }

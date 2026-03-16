@@ -1,6 +1,6 @@
 {%- comment -%}
   NEXUS-3D  ·  PERSONALIZATION ENGINE SNIPPET — Linen & Steel
-  Renders on product page: print scale, color, file upload, notes
+  Product page: scale, color, and notes (no fake file upload)
 {%- endcomment -%}
 
 <div class="nexus-personalization">
@@ -36,20 +36,21 @@
       </select>
     </div>
 
-    {%- comment -%} File Upload {%- endcomment -%}
+    {%- comment -%} Material {%- endcomment -%}
     <div class="nexus-personalization__field">
-      <label class="nexus-personalization__label">Upload 3D File</label>
-      <div class="nexus-personalization__upload-zone" id="PersonalizationDropzone">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--nx-primary)" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        <span>Drop file or click to browse</span>
-        <span style="font-size:10px; opacity:.45;">STL · OBJ · STEP</span>
-      </div>
+      <label class="nexus-personalization__label" for="NexusMaterial">Material</label>
+      <select id="NexusMaterial" name="properties[Material]" class="nexus-personalization__select">
+        <option value="PLA">PLA — Standard</option>
+        <option value="Resin">Resin — High Detail</option>
+        <option value="Nylon">Nylon — Durable</option>
+        <option value="PETG">PETG — Flexible</option>
+      </select>
     </div>
 
     {%- comment -%} Notes {%- endcomment -%}
     <div class="nexus-personalization__field">
       <label class="nexus-personalization__label" for="NexusNotes">Special Notes</label>
-      <textarea id="NexusNotes" name="properties[Notes]" rows="3" class="nexus-personalization__textarea" placeholder="Any special requirements..."></textarea>
+      <textarea id="NexusNotes" name="properties[Notes]" rows="3" class="nexus-personalization__textarea" placeholder="Any special requirements — tolerances, finish, etc."></textarea>
     </div>
   </div>
 </div>
@@ -71,7 +72,6 @@
     border-bottom: 1px solid var(--nx-outline);
   }
   .nexus-personalization__fields { display: flex; flex-direction: column; gap: 14px; }
-  .nexus-personalization__field {}
   .nexus-personalization__label {
     display: block;
     font-family: var(--nx-font-mono); font-size: 10px;
@@ -105,19 +105,5 @@
     outline: none;
     border-color: var(--nx-primary);
     box-shadow: 0 0 0 3px var(--nx-primary-10);
-  }
-  .nexus-personalization__upload-zone {
-    display: flex; flex-direction: column;
-    align-items: center; gap: 6px;
-    padding: 20px; text-align: center;
-    border: 2px dashed var(--nx-outline);
-    border-radius: var(--nx-radius-lg);
-    font-family: var(--nx-font-mono); font-size: 12px;
-    color: var(--nx-body); cursor: pointer;
-    transition: border-color .2s, background .2s;
-  }
-  .nexus-personalization__upload-zone:hover {
-    border-color: var(--nx-primary);
-    background: var(--nx-primary-04);
   }
 </style>
