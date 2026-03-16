@@ -1,0 +1,155 @@
+{%- comment -%} NEXUS-3D · FOOTER {%- endcomment -%}
+
+<footer class="nexus-footer">
+  <div class="nexus-footer__inner">
+    <div class="nexus-footer__grid">
+
+      {%- comment -%} Brand Column {%- endcomment -%}
+      <div class="nexus-footer__col">
+        <span class="nexus-footer__brand">{{ shop.name }}</span>
+        <p class="nexus-footer__tagline">{{ section.settings.tagline | default: 'Precision 3D printing for creators, engineers, and dreamers.' }}</p>
+        <div class="nexus-footer__social">
+          {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" class="nexus-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener">IG</a>{%- endif -%}
+          {%- if settings.social_twitter != blank -%}<a href="{{ settings.social_twitter }}" class="nexus-footer__social-link" aria-label="Twitter" target="_blank" rel="noopener">X</a>{%- endif -%}
+          {%- if settings.social_youtube != blank -%}<a href="{{ settings.social_youtube }}" class="nexus-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener">YT</a>{%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Link Columns {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'link_column' -%}
+          <div class="nexus-footer__col" {{ block.shopify_attributes }}>
+            <h4 class="nexus-footer__col-title">{{ block.settings.title }}</h4>
+            <ul class="nexus-footer__links">
+              {%- assign menu = block.settings.menu -%}
+              {%- for link in menu.links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="nexus-footer__bottom">
+      <span class="nexus-footer__copy">&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. All rights reserved.</span>
+      <span class="nexus-footer__powered">Powered by Nexus-3D Theme</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .nexus-footer {
+    background: var(--m3-surface-container);
+    border-top: 1px solid var(--m3-outline-variant);
+    padding: 64px 32px 32px;
+  }
+  .nexus-footer__inner { max-width: 1440px; margin: 0 auto; }
+  .nexus-footer__grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(auto-fit, minmax(140px, 1fr));
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+  .nexus-footer__brand {
+    font-family: var(--nexus-font-heading);
+    font-weight: var(--nexus-heading-weight, 900);
+    font-size: 1.15rem;
+    color: #fff;
+    letter-spacing: -.02em;
+  }
+  .nexus-footer__tagline {
+    font-size: .85rem;
+    color: var(--m3-on-surface-variant);
+    margin: 12px 0 16px;
+    line-height: 1.5;
+    max-width: 280px;
+  }
+  .nexus-footer__social { display: flex; gap: 8px; }
+  .nexus-footer__social-link {
+    font-family: var(--nexus-font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--m3-outline-variant);
+    border-radius: var(--m3-radius-full);
+    color: var(--m3-on-surface-variant);
+    text-decoration: none;
+    transition: all .25s cubic-bezier(.2, 0, 0, 1);
+  }
+  .nexus-footer__social-link:hover {
+    background: rgba(208,188,255,.08);
+    border-color: var(--nexus-accent);
+    color: var(--nexus-accent);
+  }
+  .nexus-footer__col-title {
+    font-family: var(--nexus-font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--nexus-accent);
+    margin: 0 0 16px;
+  }
+  .nexus-footer__links {
+    list-style: none; margin: 0; padding: 0;
+  }
+  .nexus-footer__links li { margin-bottom: 8px; }
+  .nexus-footer__links a {
+    font-size: .85rem;
+    color: var(--m3-on-surface-variant);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nexus-footer__links a:hover { color: var(--nexus-accent); }
+  .nexus-footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--m3-outline-variant);
+    font-family: var(--nexus-font-mono);
+    font-size: 11px;
+    color: var(--m3-on-surface-variant);
+    opacity: .45;
+  }
+
+  @media (max-width: 768px) {
+    .nexus-footer { padding: 40px 16px 24px; }
+    .nexus-footer__grid { grid-template-columns: 1fr; gap: 32px; }
+    .nexus-footer__bottom { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "nexus-footer-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Footer Tagline",
+      "default": "Precision 3D printing for creators, engineers, and dreamers."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column Title",
+          "default": "Links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

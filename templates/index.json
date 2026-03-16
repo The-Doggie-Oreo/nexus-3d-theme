@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "hero": {
+      "type": "section-hero-3d",
+      "settings": {
+        "heading": "Precision Prints. Delivered.",
+        "subheading": "From concept file to finished prototype — industrial-grade 3D printing for creators, engineers, and dreamers.",
+        "cta_label": "Upload STL",
+        "cta2_label": "Browse Catalog",
+        "show_printer_status": true,
+        "show_ship_counter": true,
+        "overlay_opacity": 40
+      },
+      "blocks": {
+        "ship_1": { "type": "recent_ship", "settings": { "project_name": "Prototype Alpha-7", "ship_date": "Mar 14" } },
+        "ship_2": { "type": "recent_ship", "settings": { "project_name": "Drone Housing v3", "ship_date": "Mar 12" } },
+        "ship_3": { "type": "recent_ship", "settings": { "project_name": "Cosplay Helmet — Iron", "ship_date": "Mar 10" } }
+      },
+      "block_order": ["ship_1", "ship_2", "ship_3"]
+    },
+    "portfolio": {
+      "type": "section-masonry-portfolio",
+      "settings": {
+        "section_title": "The Workshop",
+        "section_subtitle": "Trophies, prototypes, and production runs — all born from filament and resin.",
+        "columns_desktop": 3,
+        "gap": 16,
+        "blur_amount": 8,
+        "overlay_bg_opacity": 75
+      },
+      "blocks": {
+        "item_1": { "type": "portfolio_item", "settings": { "title": "Drone Housing v3", "tag": "Prototype", "layout": "tall", "material": "PETG", "print_time": "18h" } },
+        "item_2": { "type": "portfolio_item", "settings": { "title": "Architectural Model — Skyline", "tag": "Scale Model", "layout": "wide", "material": "PLA", "print_time": "42h" } },
+        "item_3": { "type": "portfolio_item", "settings": { "title": "Custom Trophy — Esports", "tag": "Trophy", "layout": "tall", "material": "Resin", "print_time": "8h" } },
+        "item_4": { "type": "portfolio_item", "settings": { "title": "Robotic Arm Joint", "tag": "Prototype", "layout": "square", "material": "PETG", "print_time": "6h" } },
+        "item_5": { "type": "portfolio_item", "settings": { "title": "PCB Enclosure — IoT Sensor", "tag": "Functional", "layout": "wide", "material": "ABS", "print_time": "4h" } },
+        "item_6": { "type": "portfolio_item", "settings": { "title": "Cosplay Helmet — Iron Series", "tag": "Trophy", "layout": "tall", "material": "PLA", "print_time": "36h" } }
+      },
+      "block_order": ["item_1", "item_2", "item_3", "item_4", "item_5", "item_6"]
+    }
+  },
+  "order": ["hero", "portfolio"]
+}

@@ -1,0 +1,436 @@
+{%- comment -%}
+  NEXUS-3D  ·  SECTION: PRODUCT — TECH SPECS
+  Dynamic spec-sheet grid: Layer Height, Material, Infill, etc.
+  Includes the personalization engine snippet.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<section class="nexus-product" data-section-id="{{ section.id }}">
+  <div class="nexus-product__grid">
+
+    {%- comment -%} ── LEFT: Product Gallery ── {%- endcomment -%}
+    <div class="nexus-product__gallery">
+      <div class="nexus-product__main-image">
+        {%- if product.featured_image != blank -%}
+          <img
+            id="ProductMainImage"
+            src="{{ product.featured_image | image_url: width: 1200 }}"
+            alt="{{ product.featured_image.alt | escape }}"
+            width="{{ product.featured_image.width }}"
+            height="{{ product.featured_image.height }}"
+          >
+        {%- else -%}
+          <div class="nexus-product__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+        {%- endif -%}
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="nexus-product__thumbs">
+          {%- for image in product.images -%}
+            <button class="nexus-product__thumb {% if forloop.first %}is-active{% endif %}" data-image-url="{{ image | image_url: width: 1200 }}">
+              <img src="{{ image | image_url: width: 120 }}" alt="{{ image.alt | escape }}" width="60" height="60" loading="lazy">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── RIGHT: Product Info ── {%- endcomment -%}
+    <div class="nexus-product__info">
+
+      {%- comment -%} Breadcrumb {%- endcomment -%}
+      <nav class="nexus-product__breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span>/</span>
+        {%- if product.collections.size > 0 -%}
+          <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+          <span>/</span>
+        {%- endif -%}
+        <span>{{ product.title }}</span>
+      </nav>
+
+      <h1 class="nexus-product__title">{{ product.title }}</h1>
+      <div class="nexus-product__price">
+        <span class="nexus-product__price-current">{{ current_variant.price | money }}</span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="nexus-product__price-compare">{{ current_variant.compare_at_price | money }}</span>
+        {%- endif -%}
+      </div>
+
+      <div class="nexus-product__description">{{ product.description }}</div>
+
+      {%- comment -%} ════════════════════════════════════════════
+         DYNAMIC TECH-SPECS BLOCK
+         ════════════════════════════════════════════ {%- endcomment -%}
+      <div class="nexus-techspecs">
+        <div class="nexus-techspecs__header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Technical Specifications</span>
+        </div>
+        <div class="nexus-techspecs__grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'spec' -%}
+              <div class="nexus-techspecs__item" {{ block.shopify_attributes }}>
+                <span class="nexus-techspecs__label">{{ block.settings.spec_label }}</span>
+                <span class="nexus-techspecs__value">{{ block.settings.spec_value }}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- comment -%} Material Options Chips {%- endcomment -%}
+        {%- assign materials_exist = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'material_option' -%}{%- assign materials_exist = true -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if materials_exist -%}
+          <div class="nexus-techspecs__materials">
+            <span class="nexus-techspecs__mat-label">Available Materials</span>
+            <div class="nexus-techspecs__mat-chips">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'material_option' -%}
+                  <span class="nexus-techspecs__mat-chip" {{ block.shopify_attributes }}>
+                    <span class="nexus-techspecs__mat-dot" style="background: {{ block.settings.material_color }}"></span>
+                    {{ block.settings.material_name }}
+                  </span>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ── Add to Cart Form ── {%- endcomment -%}
+      {%- form 'product', product -%}
+        {%- comment -%} Variant selector {%- endcomment -%}
+        {%- if product.variants.size > 1 -%}
+          <div class="nexus-product__variants">
+            {%- for option in product.options_with_values -%}
+              <div class="nexus-product__option">
+                <label class="nexus-product__option-label">{{ option.name }}</label>
+                <select name="id" class="nexus-personalization__select">
+                  {%- for variant in product.variants -%}
+                    <option value="{{ variant.id }}" {% if variant == current_variant %}selected{% endif %}>
+                      {{ variant.title }} — {{ variant.price | money }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {%- endif -%}
+
+        {%- comment -%} ── PERSONALIZATION ENGINE ── {%- endcomment -%}
+        {% render 'snippet-personalization-engine' %}
+
+        {%- comment -%} Quantity + ATC {%- endcomment -%}
+        <div class="nexus-product__atc-row">
+          <div class="nexus-product__qty">
+            <button type="button" class="nexus-product__qty-btn" data-action="decrease" aria-label="Decrease quantity">−</button>
+            <input type="number" name="quantity" value="1" min="1" class="nexus-product__qty-input" aria-label="Quantity">
+            <button type="button" class="nexus-product__qty-btn" data-action="increase" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="submit" class="nexus-btn nexus-btn--primary nexus-btn--full" {% unless current_variant.available %}disabled{% endunless %}>
+            {%- if current_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+          </button>
+        </div>
+      {%- endform -%}
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .nexus-product {
+    padding: 40px 32px 80px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .nexus-product__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* Gallery — M3 28px radius */
+  .nexus-product__main-image {
+    position: relative;
+    background: var(--m3-surface-container-high);
+    border-radius: var(--m3-radius-xl);
+    overflow: hidden;
+    border: 1px solid var(--m3-outline-variant);
+  }
+  .nexus-product__main-image img {
+    width: 100%;
+    display: block;
+  }
+  .nexus-product__placeholder {
+    display: flex; align-items: center; justify-content: center;
+    height: 400px; color: var(--m3-on-surface-variant); opacity: .2;
+  }
+  .nexus-product__placeholder svg { width: 64px; height: 64px; }
+  .nexus-product__thumbs {
+    display: flex; gap: 8px; margin-top: 12px;
+  }
+  .nexus-product__thumb {
+    width: 64px; height: 64px;
+    border-radius: var(--m3-radius-md); overflow: hidden;
+    border: 2px solid var(--m3-outline-variant);
+    cursor: pointer; background: none;
+    transition: border-color .2s;
+    padding: 0;
+  }
+  .nexus-product__thumb.is-active,
+  .nexus-product__thumb:hover { border-color: var(--nexus-accent); }
+  .nexus-product__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Info */
+  .nexus-product__breadcrumb {
+    display: flex; gap: 6px; align-items: center;
+    font-family: var(--nexus-font-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: .04em;
+    color: var(--m3-on-surface-variant); opacity: .55;
+    margin-bottom: 16px;
+  }
+  .nexus-product__breadcrumb a { color: inherit; text-decoration: none; }
+  .nexus-product__breadcrumb a:hover { color: var(--nexus-accent); opacity: 1; }
+
+  .nexus-product__title {
+    font-family: var(--nexus-font-heading);
+    font-weight: var(--nexus-heading-weight, 900);
+    font-size: clamp(1.5rem, 3vw, 2.4rem); color: #fff;
+    margin: 0 0 12px; letter-spacing: -.02em;
+  }
+  .nexus-product__price { margin-bottom: 20px; display: flex; gap: 10px; align-items: baseline; }
+  .nexus-product__price-current {
+    font-family: var(--nexus-font-heading);
+    font-weight: var(--nexus-heading-weight, 900);
+    font-size: 1.5rem; color: var(--nexus-accent);
+  }
+  .nexus-product__price-compare {
+    font-size: 1rem; color: var(--m3-on-surface-variant); opacity: .4;
+    text-decoration: line-through;
+  }
+  .nexus-product__description {
+    font-size: .9rem; color: var(--m3-on-surface-variant);
+    line-height: 1.7; margin-bottom: 24px;
+  }
+
+  /* ── Tech Specs — M3 Card with 28px radius ── */
+  .nexus-techspecs {
+    background: var(--m3-surface-container-high);
+    border: 1px solid var(--m3-outline-variant);
+    border-radius: var(--m3-radius-xl);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .nexus-techspecs__header {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--nexus-font-mono); font-size: 12px;
+    text-transform: uppercase; letter-spacing: .06em;
+    color: var(--nexus-accent);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--m3-outline-variant);
+  }
+  .nexus-techspecs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .nexus-techspecs__item {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 14px;
+    background: var(--m3-surface-container);
+    border: 1px solid var(--m3-outline-variant);
+    border-radius: var(--m3-radius-lg);
+    transition: box-shadow .2s;
+  }
+  .nexus-techspecs__item:hover {
+    box-shadow: var(--m3-elevation-1);
+  }
+  .nexus-techspecs__label {
+    font-family: var(--nexus-font-mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: .06em;
+    color: var(--m3-on-surface-variant); opacity: .7;
+  }
+  .nexus-techspecs__value {
+    font-family: var(--nexus-font-mono); font-size: 14px;
+    font-weight: 600; color: #fff;
+  }
+
+  .nexus-techspecs__materials {
+    padding-top: 16px;
+    border-top: 1px solid var(--m3-outline-variant);
+  }
+  .nexus-techspecs__mat-label {
+    display: block;
+    font-family: var(--nexus-font-mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: .06em;
+    color: var(--m3-on-surface-variant); opacity: .6;
+    margin-bottom: 10px;
+  }
+  .nexus-techspecs__mat-chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .nexus-techspecs__mat-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--nexus-font-mono); font-size: 12px;
+    padding: 6px 14px;
+    background: var(--m3-surface-container);
+    border: 1px solid var(--m3-outline-variant);
+    border-radius: var(--m3-radius-full);
+    color: var(--nexus-text);
+    transition: box-shadow .2s;
+  }
+  .nexus-techspecs__mat-chip:hover {
+    box-shadow: var(--m3-elevation-1);
+  }
+  .nexus-techspecs__mat-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+
+  /* Variants */
+  .nexus-product__variants { margin-bottom: 16px; }
+  .nexus-product__option { margin-bottom: 12px; }
+  .nexus-product__option-label {
+    display: block;
+    font-family: var(--nexus-font-mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: .06em;
+    color: var(--m3-on-surface-variant); opacity: .7;
+    margin-bottom: 6px;
+  }
+
+  /* Quantity + ATC — M3 */
+  .nexus-product__atc-row {
+    display: flex; gap: 12px; margin-top: 20px;
+  }
+  .nexus-product__qty {
+    display: flex; align-items: center;
+    border: 1px solid var(--m3-outline-variant);
+    border-radius: var(--m3-radius-full);
+    overflow: hidden;
+  }
+  .nexus-product__qty-btn {
+    width: 44px; height: 48px;
+    background: var(--m3-surface-container-high); color: var(--nexus-text);
+    border: none; cursor: pointer;
+    font-size: 18px;
+    transition: all .2s;
+  }
+  .nexus-product__qty-btn:hover {
+    background: var(--m3-primary-container);
+    color: var(--m3-on-primary-container);
+  }
+  .nexus-product__qty-input {
+    width: 52px; height: 48px; text-align: center;
+    background: var(--nexus-bg); color: #fff;
+    border: none; border-left: 1px solid var(--m3-outline-variant);
+    border-right: 1px solid var(--m3-outline-variant);
+    font-family: var(--nexus-font-mono); font-size: 14px;
+    -moz-appearance: textfield;
+  }
+  .nexus-product__qty-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  @media (max-width: 960px) {
+    .nexus-product__grid { grid-template-columns: 1fr; }
+    .nexus-product { padding: 24px 16px 60px; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    /* Quantity controls */
+    document.querySelectorAll('.nexus-product__qty-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = btn.closest('.nexus-product__qty').querySelector('.nexus-product__qty-input');
+        var val = parseInt(input.value, 10) || 1;
+        if (btn.dataset.action === 'increase') input.value = val + 1;
+        else if (btn.dataset.action === 'decrease' && val > 1) input.value = val - 1;
+      });
+    });
+
+    /* Thumbnail switcher */
+    document.querySelectorAll('.nexus-product__thumb').forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        var mainImg = document.getElementById('ProductMainImage');
+        if (mainImg) mainImg.src = thumb.dataset.imageUrl;
+        document.querySelectorAll('.nexus-product__thumb').forEach(function (t) { t.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product — Tech Specs",
+  "tag": "section",
+  "class": "nexus-section-product",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Tech Spec",
+      "settings": [
+        {
+          "type": "text",
+          "id": "spec_label",
+          "label": "Spec Label",
+          "default": "Layer Height"
+        },
+        {
+          "type": "text",
+          "id": "spec_value",
+          "label": "Spec Value",
+          "default": "0.1mm"
+        }
+      ]
+    },
+    {
+      "type": "material_option",
+      "name": "Material Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "material_name",
+          "label": "Material Name",
+          "default": "PLA"
+        },
+        {
+          "type": "color",
+          "id": "material_color",
+          "label": "Color Indicator",
+          "default": "#22c55e"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product — Tech Specs",
+      "blocks": [
+        { "type": "spec", "settings": { "spec_label": "Layer Height", "spec_value": "0.1mm" } },
+        { "type": "spec", "settings": { "spec_label": "Resolution", "spec_value": "50 microns" } },
+        { "type": "spec", "settings": { "spec_label": "Infill", "spec_value": "20%" } },
+        { "type": "spec", "settings": { "spec_label": "Build Volume", "spec_value": "256×256×256mm" } },
+        { "type": "spec", "settings": { "spec_label": "Print Time", "spec_value": "~12 hours" } },
+        { "type": "spec", "settings": { "spec_label": "Weight", "spec_value": "145g" } },
+        { "type": "material_option", "settings": { "material_name": "PLA", "material_color": "#22c55e" } },
+        { "type": "material_option", "settings": { "material_name": "PETG", "material_color": "#3b82f6" } },
+        { "type": "material_option", "settings": { "material_name": "Resin", "material_color": "#f59e0b" } },
+        { "type": "material_option", "settings": { "material_name": "ABS", "material_color": "#ef4444" } }
+      ]
+    }
+  ],
+  "templates": ["product"]
+}
+{% endschema %}

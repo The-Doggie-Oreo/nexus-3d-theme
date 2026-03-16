@@ -1,0 +1,211 @@
+/* ================================================
+   NEXUS-3D THEME  ·  CORE STYLESHEET
+   Material 3 Design System
+   Palette: M3 Dark · Primary #D0BCFF · Surface #1C1B1F
+   ================================================ */
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base ── */
+html {
+  font-size: var(--nexus-font-size, 16px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body.nexus-body {
+  font-family: var(--nexus-font-body);
+  background-color: var(--nexus-bg);
+  color: var(--nexus-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--nexus-accent);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+a:hover { color: var(--m3-on-primary-container); }
+
+/* ── Skip Link ── */
+.nexus-skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  padding: 8px 16px;
+  background: var(--nexus-accent);
+  color: var(--m3-on-primary);
+  z-index: 10000;
+  border-radius: var(--m3-radius-full);
+  font-family: var(--nexus-font-mono);
+  font-size: 12px;
+}
+.nexus-skip-link:focus {
+  top: 16px;
+}
+
+/* ── Buttons — M3 Pill Shape ── */
+.nexus-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--nexus-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--m3-radius-full);
+  cursor: pointer;
+  transition: all .25s cubic-bezier(.2, 0, 0, 1);
+  text-decoration: none;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.nexus-btn--primary {
+  background: var(--nexus-accent);
+  color: var(--m3-on-primary);
+}
+.nexus-btn--primary:hover {
+  background: var(--m3-on-primary-container);
+  box-shadow: var(--m3-elevation-2);
+  transform: translateY(-1px);
+}
+.nexus-btn--primary:active {
+  transform: translateY(0);
+  box-shadow: var(--m3-elevation-1);
+}
+.nexus-btn--primary:disabled {
+  opacity: .38;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.nexus-btn--outline {
+  background: transparent;
+  color: var(--nexus-accent);
+  border: 1px solid var(--m3-outline);
+}
+.nexus-btn--outline:hover {
+  background: rgba(208, 188, 255, .08);
+  border-color: var(--nexus-accent);
+  box-shadow: var(--m3-elevation-1);
+}
+
+.nexus-btn--tonal {
+  background: var(--m3-primary-container);
+  color: var(--m3-on-primary-container);
+}
+.nexus-btn--tonal:hover {
+  box-shadow: var(--m3-elevation-1);
+  transform: translateY(-1px);
+}
+
+.nexus-btn--full {
+  width: 100%;
+  flex: 1;
+}
+
+.nexus-btn--sm {
+  padding: 10px 20px;
+  font-size: 12px;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(208, 188, 255, .3);
+  color: #fff;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--nexus-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--m3-surface-variant);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nexus-accent);
+}
+
+/* ── Utility Classes ── */
+.nexus-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.nexus-mono {
+  font-family: var(--nexus-font-mono);
+}
+.nexus-text-accent {
+  color: var(--nexus-accent);
+}
+.nexus-visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* ── M3 Surface Tint ── */
+.m3-surface-1 {
+  background: color-mix(in srgb, var(--nexus-accent) 5%, var(--nexus-bg));
+}
+.m3-surface-2 {
+  background: color-mix(in srgb, var(--nexus-accent) 8%, var(--nexus-bg));
+}
+.m3-surface-3 {
+  background: color-mix(in srgb, var(--nexus-accent) 11%, var(--nexus-bg));
+}
+
+/* ── Animations ── */
+@keyframes nexus-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes nexus-slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Main content spacing ── */
+.nexus-main {
+  min-height: 60vh;
+}
+
+/* ── Focus Styles — M3 ── */
+:focus-visible {
+  outline: 2px solid var(--nexus-accent);
+  outline-offset: 2px;
+}
+
+/* ── Responsive padding bottom for mobile prototyper bar ── */
+@media (max-width: 768px) {
+  .nexus-main {
+    padding-bottom: 72px;
+  }
+}

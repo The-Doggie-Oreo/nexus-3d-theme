@@ -1,0 +1,40 @@
+{%- comment -%} NEXUS-3D · MAIN COLLECTION {%- endcomment -%}
+
+<section class="nexus-collection" style="padding: 40px 32px 80px; max-width: 1440px; margin: 0 auto;">
+  <div class="nexus-masonry__header" style="text-align:center; margin-bottom:40px;">
+    <h1 class="nexus-masonry__title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p class="nexus-masonry__subtitle">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+    {%- for product in collection.products -%}
+      <a href="{{ product.url }}" style="text-decoration:none;">
+        <div style="background:var(--nexus-surface); border:1px solid var(--nexus-border); border-radius:var(--nexus-radius); overflow:hidden; transition:transform .3s;">
+          {%- if product.featured_image != blank -%}
+            <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" style="width:100%; aspect-ratio:1; object-fit:cover;" loading="lazy">
+          {%- endif -%}
+          <div style="padding:16px;">
+            <h3 style="font-family:var(--nexus-font-heading); font-size:1rem; color:#fff; margin:0 0 6px;">{{ product.title }}</h3>
+            <span style="font-family:var(--nexus-font-mono); font-size:14px; color:var(--nexus-accent); font-weight:600;">{{ product.price | money }}</span>
+          </div>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if collection.products.size == 0 -%}
+    <p style="text-align:center; color:var(--nexus-text); opacity:.5; padding:60px 0;">No products in this collection yet.</p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Main Collection",
+  "tag": "section",
+  "class": "nexus-section-collection",
+  "settings": [],
+  "templates": ["collection"]
+}
+{% endschema %}

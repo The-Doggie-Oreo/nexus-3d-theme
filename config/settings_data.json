@@ -1,0 +1,19 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_primary_bg": "#1C1B1F",
+      "color_accent": "#D0BCFF",
+      "color_text": "#E6E1E5",
+      "color_surface": "#2B2930",
+      "color_border": "#49454F",
+      "prototyper_enabled": true,
+      "prototyper_cta_text": "Upload STL",
+      "prototyper_quote_text": "Request Quote",
+      "printer_status": "idle",
+      "printer_status_custom": "Accepting new projects",
+      "total_prints_shipped": "1247",
+      "workbench_enabled": true
+    }
+  }
+}

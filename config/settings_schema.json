@@ -1,0 +1,198 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Nexus-3D",
+    "theme_version": "1.0.0",
+    "theme_author": "Nexus Studio",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Nexus-3D · Material 3 Color Palette"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_bg",
+        "label": "Primary Background (M3 Dark Surface)",
+        "default": "#1C1B1F"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color (M3 Primary Violet)",
+        "default": "#D0BCFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color (M3 On-Surface)",
+        "default": "#E6E1E5"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Surface / Card Color (M3 Container)",
+        "default": "#2B2930"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border / Divider Color (M3 Outline Variant)",
+        "default": "#49454F"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Font Settings"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "inter_n9"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_body_size",
+        "label": "Base Font Size (px)",
+        "min": 12,
+        "max": 22,
+        "step": 1,
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Prototyper Bar",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Persistent Prototyper Bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "prototyper_enabled",
+        "label": "Enable Prototyper Sidebar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "prototyper_cta_text",
+        "label": "Upload CTA Text",
+        "default": "Upload STL"
+      },
+      {
+        "type": "text",
+        "id": "prototyper_quote_text",
+        "label": "Quote CTA Text",
+        "default": "Request Quote"
+      },
+      {
+        "type": "url",
+        "id": "prototyper_upload_url",
+        "label": "Upload Page URL"
+      },
+      {
+        "type": "url",
+        "id": "prototyper_quote_url",
+        "label": "Quote Page URL"
+      }
+    ]
+  },
+  {
+    "name": "3D Printer Status",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Live Status Display"
+      },
+      {
+        "type": "select",
+        "id": "printer_status",
+        "label": "Current Printer Status",
+        "options": [
+          { "value": "printing", "label": "🟢 Printing" },
+          { "value": "idle", "label": "🟡 Idle — Ready for Orders" },
+          { "value": "maintenance", "label": "🔴 Maintenance" }
+        ],
+        "default": "idle"
+      },
+      {
+        "type": "text",
+        "id": "printer_status_custom",
+        "label": "Custom Status Message",
+        "default": "Accepting new projects"
+      },
+      {
+        "type": "text",
+        "id": "total_prints_shipped",
+        "label": "Total Prints Shipped (Counter)",
+        "default": "1247"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter / X URL"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "text",
+        "id": "social_thingiverse",
+        "label": "Thingiverse / Printables URL"
+      }
+    ]
+  },
+  {
+    "name": "Designer Workbench",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Integrated Messenger UI"
+      },
+      {
+        "type": "checkbox",
+        "id": "workbench_enabled",
+        "label": "Enable Designer's Workbench Panel",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "workbench_intro_text",
+        "label": "Intro Message",
+        "default": "Welcome to the Designer's Workbench. Drop your files, track your project, and chat directly with our print engineers."
+      }
+    ]
+  }
+]

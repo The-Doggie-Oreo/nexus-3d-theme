@@ -1,0 +1,530 @@
+{%- comment -%}
+  ============================================================
+  NEXUS-3D  ·  SECTION: MASONRY PORTFOLIO
+  Variable Masonry grid with Glassmorphism overlays.
+    - Large vertical blocks for trophies / prints
+    - Wide landscape blocks for schematics
+    - Semi-transparent frosted-glass description overlays
+  ============================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign section_title   = section.settings.section_title
+  assign section_sub     = section.settings.section_subtitle
+  assign columns_desktop = section.settings.columns_desktop
+  assign gap             = section.settings.gap
+  assign blur_amount     = section.settings.blur_amount
+  assign overlay_bg      = section.settings.overlay_bg_opacity
+-%}
+
+<section
+  id="MasonryPortfolio-{{ section.id }}"
+  class="nexus-masonry-section"
+  data-section-id="{{ section.id }}"
+  data-section-type="masonry-portfolio"
+>
+  {%- comment -%} ── Section Header ── {%- endcomment -%}
+  {%- if section_title != blank or section_sub != blank -%}
+    <div class="nexus-masonry__header">
+      {%- if section_title != blank -%}
+        <h2 class="nexus-masonry__title">{{ section_title }}</h2>
+      {%- endif -%}
+      {%- if section_sub != blank -%}
+        <p class="nexus-masonry__subtitle">{{ section_sub }}</p>
+      {%- endif -%}
+
+      {%- comment -%} Filter Pills {%- endcomment -%}
+      {%- assign all_tags = '' -%}
+      {%- for block in section.blocks -%}
+        {%- if block.settings.tag != blank -%}
+          {%- unless all_tags contains block.settings.tag -%}
+            {%- if all_tags != '' -%}{%- assign all_tags = all_tags | append: '|' -%}{%- endif -%}
+            {%- assign all_tags = all_tags | append: block.settings.tag -%}
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign tag_array = all_tags | split: '|' -%}
+      {%- if tag_array.size > 0 -%}
+        <div class="nexus-masonry__filters" role="tablist">
+          <button class="nexus-masonry__filter-pill is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          {%- for tag in tag_array -%}
+            <button class="nexus-masonry__filter-pill" data-filter="{{ tag | handleize }}" role="tab" aria-selected="false">{{ tag }}</button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── Masonry Grid ── {%- endcomment -%}
+  <div
+    class="nexus-masonry__grid"
+    style="--masonry-columns: {{ columns_desktop }}; --masonry-gap: {{ gap }}px;"
+  >
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign card_image   = block.settings.image
+        assign card_title   = block.settings.title
+        assign card_desc    = block.settings.description
+        assign card_link    = block.settings.link
+        assign card_tag     = block.settings.tag
+        assign card_layout  = block.settings.layout
+        assign card_material = block.settings.material
+        assign card_time    = block.settings.print_time
+      -%}
+
+      <article
+        class="nexus-masonry__card nexus-masonry__card--{{ card_layout }}"
+        data-tag="{{ card_tag | handleize }}"
+        {{ block.shopify_attributes }}
+      >
+        {%- comment -%} Image {%- endcomment -%}
+        <div class="nexus-masonry__card-media">
+          {%- if card_image != blank -%}
+            <img
+              class="nexus-masonry__card-img"
+              src="{{ card_image | image_url: width: 1200 }}"
+              srcset="{{ card_image | image_url: width: 600 }} 600w,
+                      {{ card_image | image_url: width: 900 }} 900w,
+                      {{ card_image | image_url: width: 1200 }} 1200w"
+              sizes="(max-width: 768px) 100vw, {{ 100 | divided_by: columns_desktop }}vw"
+              alt="{{ card_image.alt | default: card_title | escape }}"
+              loading="lazy"
+              width="{{ card_image.width }}"
+              height="{{ card_image.height }}"
+            >
+          {%- else -%}
+            <div class="nexus-masonry__card-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Glassmorphism Overlay {%- endcomment -%}
+        <div
+          class="nexus-masonry__card-glass"
+          style="--glass-blur: {{ blur_amount }}px; --glass-bg-opacity: {{ overlay_bg | divided_by: 100.0 }};"
+        >
+          {%- if card_tag != blank -%}
+            <span class="nexus-masonry__card-tag">{{ card_tag }}</span>
+          {%- endif -%}
+
+          {%- if card_title != blank -%}
+            <h3 class="nexus-masonry__card-title">
+              {%- if card_link != blank -%}<a href="{{ card_link }}">{{ card_title }}</a>{%- else -%}{{ card_title }}{%- endif -%}
+            </h3>
+          {%- endif -%}
+
+          {%- if card_desc != blank -%}
+            <p class="nexus-masonry__card-desc">{{ card_desc }}</p>
+          {%- endif -%}
+
+          {%- comment -%} Micro Spec Chips {%- endcomment -%}
+          {%- if card_material != blank or card_time != blank -%}
+            <div class="nexus-masonry__card-chips">
+              {%- if card_material != blank -%}
+                <span class="nexus-masonry__chip">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                  {{ card_material }}
+                </span>
+              {%- endif -%}
+              {%- if card_time != blank -%}
+                <span class="nexus-masonry__chip">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  {{ card_time }}
+                </span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  /* ================================================
+     MASONRY PORTFOLIO — M3 Scoped Styles
+     ================================================ */
+  .nexus-masonry-section {
+    padding: 80px 24px;
+    background: var(--nexus-bg);
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .nexus-masonry__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .nexus-masonry__title {
+    font-family: var(--nexus-font-heading);
+    font-weight: var(--nexus-heading-weight, 900);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    color: #fff;
+    margin: 0 0 12px;
+    letter-spacing: -.03em;
+  }
+  .nexus-masonry__subtitle {
+    font-family: var(--nexus-font-body);
+    font-size: 1.05rem;
+    color: var(--m3-on-surface-variant);
+    max-width: 540px;
+    margin: 0 auto 32px;
+    line-height: 1.65;
+  }
+
+  /* ── M3 Segmented Filter Pills ── */
+  .nexus-masonry__filters {
+    display: inline-flex;
+    justify-content: center;
+    gap: 0;
+    background: var(--m3-surface-container);
+    border-radius: var(--m3-radius-full);
+    border: 1px solid var(--m3-outline-variant);
+    padding: 4px;
+    flex-wrap: wrap;
+  }
+  .nexus-masonry__filter-pill {
+    font-family: var(--nexus-font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .01em;
+    padding: 8px 20px;
+    border: none;
+    border-radius: var(--m3-radius-full);
+    background: transparent;
+    color: var(--m3-on-surface-variant);
+    cursor: pointer;
+    transition: all .25s cubic-bezier(.2, 0, 0, 1);
+  }
+  .nexus-masonry__filter-pill:hover {
+    background: rgba(208, 188, 255, .08);
+    color: var(--nexus-accent);
+  }
+  .nexus-masonry__filter-pill.is-active {
+    background: var(--m3-primary, #D0BCFF);
+    color: var(--m3-on-primary, #381E72);
+    font-weight: 600;
+    box-shadow: var(--m3-elevation-1);
+  }
+
+  /* ── Masonry Grid ── */
+  .nexus-masonry__grid {
+    columns: var(--masonry-columns, 3);
+    column-gap: var(--masonry-gap, 16px);
+  }
+
+  /* ── Card — M3 28px Radius Containers ── */
+  .nexus-masonry__card {
+    break-inside: avoid;
+    position: relative;
+    border-radius: var(--m3-radius-xl);
+    overflow: hidden;
+    margin-bottom: var(--masonry-gap, 16px);
+    cursor: pointer;
+    transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s;
+  }
+  .nexus-masonry__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--m3-elevation-3);
+  }
+
+  /* Layout variants */
+  .nexus-masonry__card--tall   { aspect-ratio: 3/5; }
+  .nexus-masonry__card--wide   { aspect-ratio: 16/9; }
+  .nexus-masonry__card--square { aspect-ratio: 1/1; }
+  .nexus-masonry__card--auto   { aspect-ratio: auto; }
+
+  .nexus-masonry__card-media {
+    position: absolute;
+    inset: 0;
+  }
+  .nexus-masonry__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s cubic-bezier(.22,1,.36,1);
+  }
+  .nexus-masonry__card:hover .nexus-masonry__card-img {
+    transform: scale(1.05);
+  }
+  .nexus-masonry__card-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--m3-surface-container-high);
+    color: var(--m3-on-surface-variant);
+    opacity: .3;
+  }
+  .nexus-masonry__card-placeholder svg { width: 48px; height: 48px; }
+
+  /* ── M3 Tonal Text Background Overlay ── */
+  .nexus-masonry__card-glass {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+    background: linear-gradient(
+      to top,
+      rgba(28, 27, 31, var(--glass-bg-opacity, 0.8)) 0%,
+      rgba(28, 27, 31, calc(var(--glass-bg-opacity, 0.8) * 0.2)) 50%,
+      transparent 100%
+    );
+    backdrop-filter: blur(var(--glass-blur, 8px));
+    -webkit-backdrop-filter: blur(var(--glass-blur, 8px));
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  .nexus-masonry__card:hover .nexus-masonry__card-glass {
+    opacity: 1;
+  }
+
+  /* Tonal hint at bottom (always visible) */
+  .nexus-masonry__card-glass::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
+    background: linear-gradient(to top, rgba(28,27,31,.65), transparent);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity .3s;
+  }
+  .nexus-masonry__card:hover .nexus-masonry__card-glass::before {
+    opacity: 0;
+  }
+
+  .nexus-masonry__card-tag {
+    display: inline-block;
+    font-family: var(--nexus-font-body);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border: 1px solid rgba(208,188,255,.2);
+    border-radius: var(--m3-radius-full);
+    color: var(--nexus-accent);
+    background: rgba(208,188,255,.1);
+    margin-bottom: 10px;
+    align-self: flex-start;
+    backdrop-filter: blur(4px);
+  }
+  .nexus-masonry__card-title {
+    font-family: var(--nexus-font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #fff;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .nexus-masonry__card-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .nexus-masonry__card-desc {
+    font-family: var(--nexus-font-body);
+    font-size: .85rem;
+    color: var(--m3-on-surface-variant);
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Micro chips — M3 */
+  .nexus-masonry__card-chips {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .nexus-masonry__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--nexus-font-mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: var(--m3-radius-full);
+    background: rgba(208,188,255,.08);
+    border: 1px solid rgba(208,188,255,.12);
+    color: var(--m3-on-surface-variant);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .nexus-masonry__grid { columns: 2; }
+  }
+  @media (max-width: 640px) {
+    .nexus-masonry__grid { columns: 1; }
+    .nexus-masonry-section { padding: 48px 16px; }
+    .nexus-masonry__card-glass { opacity: 1; }
+    .nexus-masonry__filters { flex-wrap: wrap; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var section = document.getElementById('MasonryPortfolio-{{ section.id }}');
+    if (!section) return;
+
+    var pills  = section.querySelectorAll('.nexus-masonry__filter-pill');
+    var cards   = section.querySelectorAll('.nexus-masonry__card');
+
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        pills.forEach(function (p) { p.classList.remove('is-active'); p.setAttribute('aria-selected', 'false'); });
+        pill.classList.add('is-active');
+        pill.setAttribute('aria-selected', 'true');
+
+        var filter = pill.dataset.filter;
+        cards.forEach(function (card) {
+          if (filter === 'all' || card.dataset.tag === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Masonry Portfolio",
+  "tag": "section",
+  "class": "nexus-section-masonry",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "The Workshop"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Trophies, prototypes, and production runs — all born from filament and resin."
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Desktop Columns",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Grid Gap (px)",
+      "min": 4,
+      "max": 32,
+      "step": 4,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "blur_amount",
+      "label": "Glass Blur (px)",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "overlay_bg_opacity",
+      "label": "Overlay Background Opacity (%)",
+      "min": 20,
+      "max": 95,
+      "step": 5,
+      "default": 75
+    }
+  ],
+  "blocks": [
+    {
+      "type": "portfolio_item",
+      "name": "Portfolio Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Project Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A brief description of the print project, material used, and final result."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Category Tag",
+          "default": "Prototype"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Card Layout",
+          "options": [
+            { "value": "tall",   "label": "Tall (3:5) — Trophies" },
+            { "value": "wide",   "label": "Wide (16:9) — Schematics" },
+            { "value": "square", "label": "Square (1:1)" },
+            { "value": "auto",   "label": "Auto (Image Ratio)" }
+          ],
+          "default": "tall"
+        },
+        {
+          "type": "text",
+          "id": "material",
+          "label": "Material",
+          "default": "PLA"
+        },
+        {
+          "type": "text",
+          "id": "print_time",
+          "label": "Print Time",
+          "default": "12h 30m"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Masonry Portfolio",
+      "blocks": [
+        { "type": "portfolio_item", "settings": { "title": "Drone Housing v3", "tag": "Prototype", "layout": "tall", "material": "PETG", "print_time": "18h" } },
+        { "type": "portfolio_item", "settings": { "title": "Architectural Model — Skyline", "tag": "Scale Model", "layout": "wide", "material": "PLA", "print_time": "42h" } },
+        { "type": "portfolio_item", "settings": { "title": "Custom Trophy — Esports", "tag": "Trophy", "layout": "tall", "material": "Resin", "print_time": "8h" } },
+        { "type": "portfolio_item", "settings": { "title": "Robotic Arm Joint", "tag": "Prototype", "layout": "square", "material": "PETG", "print_time": "6h" } },
+        { "type": "portfolio_item", "settings": { "title": "PCB Enclosure — IoT Sensor", "tag": "Functional", "layout": "wide", "material": "ABS", "print_time": "4h" } },
+        { "type": "portfolio_item", "settings": { "title": "Cosplay Helmet — Iron Series", "tag": "Trophy", "layout": "tall", "material": "PLA", "print_time": "36h" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

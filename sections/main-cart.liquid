@@ -1,0 +1,55 @@
+{%- comment -%} NEXUS-3D · MAIN CART {%- endcomment -%}
+
+<section class="nexus-cart" style="padding: 40px 32px 80px; max-width: 960px; margin: 0 auto;">
+  <h1 style="font-family:var(--nexus-font-heading); font-weight:800; font-size:1.8rem; color:#fff; margin:0 0 32px;">Your Cart</h1>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post">
+      {%- for item in cart.items -%}
+        <div style="display:flex; gap:16px; align-items:center; padding:20px 0; border-bottom:1px solid var(--nexus-border);">
+          {%- if item.image != blank -%}
+            <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.image.alt | escape }}" style="width:80px; height:80px; object-fit:cover; border-radius:var(--nexus-radius); border:1px solid var(--nexus-border);">
+          {%- endif -%}
+          <div style="flex:1;">
+            <a href="{{ item.url }}" style="font-family:var(--nexus-font-heading); font-weight:600; color:#fff; font-size:.95rem;">{{ item.product.title }}</a>
+            {%- if item.variant.title != 'Default Title' -%}
+              <div style="font-size:.8rem; color:var(--nexus-text); opacity:.5;">{{ item.variant.title }}</div>
+            {%- endif -%}
+            {%- for property in item.properties -%}
+              {%- if property.last != blank -%}
+                <div style="font-family:var(--nexus-font-mono); font-size:11px; color:var(--nexus-accent); margin-top:4px;">
+                  {{ property.first }}: {{ property.last }}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <span style="font-family:var(--nexus-font-mono); color:var(--nexus-accent); font-weight:600;">{{ item.final_line_price | money }}</span>
+        </div>
+      {%- endfor -%}
+
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 0;">
+        <span style="font-family:var(--nexus-font-heading); font-weight:700; color:#fff; font-size:1.1rem;">Total</span>
+        <span style="font-family:var(--nexus-font-mono); font-weight:700; color:var(--nexus-accent); font-size:1.3rem;">{{ cart.total_price | money }}</span>
+      </div>
+
+      <button type="submit" name="checkout" class="nexus-btn nexus-btn--primary nexus-btn--full">
+        Checkout
+      </button>
+    </form>
+  {%- else -%}
+    <p style="text-align:center; color:var(--nexus-text); opacity:.5; padding:60px 0;">Your cart is empty.</p>
+    <div style="text-align:center;">
+      <a href="{{ routes.all_products_collection_url }}" class="nexus-btn nexus-btn--outline">Browse Products</a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Main Cart",
+  "tag": "section",
+  "class": "nexus-section-cart",
+  "settings": [],
+  "templates": ["cart"]
+}
+{% endschema %}
