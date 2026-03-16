@@ -1,85 +1,207 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "prototyper-bar": {
-      "type": "prototyper-bar",
-      "settings": {
-        "enable_bar": true,
-        "status_text": "PRINTERS ONLINE",
-        "status_color": "#2D6A4F",
-        "announcement": "Free shipping on orders over £50"
-      }
-    },
     "hero": {
       "type": "section-hero-3d",
       "settings": {
+        "hero_image": "shopify://shop_images/Gemini_Generated_Image_s94779s94779s947.png",
         "badge_text": "Now Accepting Orders",
-        "heading": "PRECISION PRINTS. DELIVERED.",
-        "subheading": "From prototype to production — engineered 3D printing for creators, engineers and businesses.",
+        "heading": "Precision Prints. Delivered.",
+        "subheading": "From concept file to finished prototype — industrial-grade 3D printing for creators, engineers, and dreamers.",
         "show_search": true,
-        "cta_label": "Get a Quote",
+        "cta_label": "Upload STL",
         "cta_link": "",
-        "cta2_label": "View Our Work",
+        "cta2_label": "Browse Catalog",
         "cta2_link": ""
       }
     },
-    "trust-marquee": {
-      "type": "section-trust-marquee",
-      "settings": {},
-      "blocks": {
-        "stat-1": { "type": "stat", "settings": { "label": "PRINTERS", "value": "12" }},
-        "stat-2": { "type": "stat", "settings": { "label": "RESOLUTION", "value": "0.02MM" }},
-        "stat-3": { "type": "stat", "settings": { "label": "SHIPPED", "value": "1,200+" }},
-        "stat-4": { "type": "stat", "settings": { "label": "EST. REPLY", "value": "15 MIN" }},
-        "stat-5": { "type": "stat", "settings": { "label": "MATERIALS", "value": "8 TYPES" }},
-        "stat-6": { "type": "stat", "settings": { "label": "UPTIME", "value": "99.2%" }}
-      },
-      "block_order": ["stat-1","stat-2","stat-3","stat-4","stat-5","stat-6"]
-    },
-    "masonry-portfolio": {
+    "portfolio": {
       "type": "section-masonry-portfolio",
-      "settings": {
-        "heading": "Featured Work",
-        "subheading": "A selection of recent prints — from functional prototypes to creative builds."
-      },
       "blocks": {
-        "card-1": { "type": "card", "settings": { "title": "Drone Housing", "category": "Functional", "material_tag": "Nylon", "time_tag": "18h", "card_size": "tall" }},
-        "card-2": { "type": "card", "settings": { "title": "Architectural Model", "category": "Prototype", "material_tag": "Resin", "time_tag": "24h", "card_size": "wide" }},
-        "card-3": { "type": "card", "settings": { "title": "Custom Trophy", "category": "Creative", "material_tag": "PLA", "time_tag": "8h", "card_size": "square" }},
-        "card-4": { "type": "card", "settings": { "title": "Robotic Arm Joint", "category": "Functional", "material_tag": "PETG", "time_tag": "14h", "card_size": "square" }},
-        "card-5": { "type": "card", "settings": { "title": "PCB Enclosure", "category": "Functional", "material_tag": "PLA", "time_tag": "6h", "card_size": "wide" }},
-        "card-6": { "type": "card", "settings": { "title": "Cosplay Helmet", "category": "Creative", "material_tag": "PLA", "time_tag": "32h", "card_size": "tall" }}
+        "item_1": {
+          "type": "portfolio_item",
+          "settings": {
+            "title": "Drone Housing v3",
+            "description": "",
+            "link": "",
+            "tag": "Prototype",
+            "layout": "tall",
+            "material": "PETG",
+            "print_time": "18h"
+          }
+        },
+        "item_2": {
+          "type": "portfolio_item",
+          "settings": {
+            "title": "Architectural Model — Skyline",
+            "description": "",
+            "link": "",
+            "tag": "Scale Model",
+            "layout": "wide",
+            "material": "PLA",
+            "print_time": "42h"
+          }
+        },
+        "item_3": {
+          "type": "portfolio_item",
+          "settings": {
+            "title": "Custom Trophy — Esports",
+            "description": "",
+            "link": "",
+            "tag": "Trophy",
+            "layout": "tall",
+            "material": "Resin",
+            "print_time": "8h"
+          }
+        },
+        "item_4": {
+          "type": "portfolio_item",
+          "settings": {
+            "title": "Robotic Arm Joint",
+            "description": "",
+            "link": "",
+            "tag": "Prototype",
+            "layout": "square",
+            "material": "PETG",
+            "print_time": "6h"
+          }
+        },
+        "item_5": {
+          "type": "portfolio_item",
+          "settings": {
+            "title": "PCB Enclosure — IoT Sensor",
+            "description": "",
+            "link": "",
+            "tag": "Functional",
+            "layout": "wide",
+            "material": "ABS",
+            "print_time": "4h"
+          }
+        },
+        "item_6": {
+          "type": "portfolio_item",
+          "settings": {
+            "title": "Cosplay Helmet — Iron Series",
+            "description": "",
+            "link": "",
+            "tag": "Trophy",
+            "layout": "tall",
+            "material": "PLA",
+            "print_time": "36h"
+          }
+        }
       },
-      "block_order": ["card-1","card-2","card-3","card-4","card-5","card-6"]
-    },
-    "material-lab": {
-      "type": "section-material-lab",
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6"
+      ],
       "settings": {
-        "heading": "Material Lab",
-        "subheading": "Explore our materials. Compare strength, flexibility and detail resolution."
+        "section_title": "The Workshop",
+        "section_subtitle": "Trophies, prototypes, and production runs — all born from filament and resin.",
+        "columns_desktop": 3,
+        "gap": 16
       }
     },
-    "process-flow": {
-      "type": "section-process-flow",
+    "main_materials_EaNXbE": {
+      "type": "main-materials",
+      "blocks": {
+        "material_XKtKPh": {
+          "type": "material",
+          "settings": {
+            "name": "PLA",
+            "type": "FDM Filament",
+            "accent_color": "#2a455c",
+            "description": "The go-to material for prototyping. Biodegradable, easy to print, and available in many colors.",
+            "strength": 60,
+            "flexibility": 40,
+            "heat_resistance": 30,
+            "detail": 70,
+            "layer_min": "0.1mm",
+            "temp": "200°C",
+            "price_tier": "$$",
+            "best_for": "Prototypes, display models, low-stress parts"
+          }
+        },
+        "material_HFAe4M": {
+          "type": "material",
+          "settings": {
+            "name": "Resin (SLA)",
+            "type": "Photopolymer",
+            "accent_color": "#8b6f47",
+            "description": "The go-to material for prototyping. Biodegradable, easy to print, and available in many colors.",
+            "strength": 45,
+            "flexibility": 20,
+            "heat_resistance": 35,
+            "detail": 95,
+            "layer_min": "0.025mm",
+            "temp": "N/A",
+            "price_tier": "$$$",
+            "best_for": "Miniatures, jewelry, dental, high-detail prototypes"
+          }
+        },
+        "material_UHj8nD": {
+          "type": "material",
+          "settings": {
+            "name": "Nylon (PA12)",
+            "type": "FDM / SLS",
+            "accent_color": "#2d6a4f",
+            "description": "The go-to material for prototyping. Biodegradable, easy to print, and available in many colors.",
+            "strength": 90,
+            "flexibility": 75,
+            "heat_resistance": 80,
+            "detail": 55,
+            "layer_min": "0.1mm",
+            "temp": "250°C",
+            "price_tier": "$$$$",
+            "best_for": "Functional parts, hinges, snap-fits, gears"
+          }
+        },
+        "material_rgGyCW": {
+          "type": "material",
+          "settings": {
+            "name": "PETG",
+            "type": "FDM Filament",
+            "accent_color": "#3b82f6",
+            "description": "The go-to material for prototyping. Biodegradable, easy to print, and available in many colors.",
+            "strength": 75,
+            "flexibility": 55,
+            "heat_resistance": 65,
+            "detail": 60,
+            "layer_min": "0.1mm",
+            "temp": "230°C",
+            "price_tier": "$$",
+            "best_for": "Outdoor parts, food-safe containers, mechanical parts"
+          }
+        }
+      },
+      "block_order": [
+        "material_XKtKPh",
+        "material_HFAe4M",
+        "material_UHj8nD",
+        "material_rgGyCW"
+      ],
+      "name": "Materials Lab",
       "settings": {
-        "heading": "How It Works",
-        "subheading": "From file to finished part in four simple steps."
-      }
-    },
-    "faq": {
-      "type": "section-faq-accordion",
-      "settings": {
-        "heading": "Frequently Asked Questions",
-        "subheading": "Everything you need to know about our 3D printing service."
+        "heading": "The Material Lab",
+        "subheading": "Deep-dive into every material we offer. Compare properties, discover what's best for your project."
       }
     }
   },
   "order": [
-    "prototyper-bar",
     "hero",
-    "trust-marquee",
-    "masonry-portfolio",
-    "material-lab",
-    "process-flow",
-    "faq"
+    "portfolio",
+    "main_materials_EaNXbE"
   ]
 }
