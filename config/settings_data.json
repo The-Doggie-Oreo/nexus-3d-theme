@@ -31,7 +31,7 @@
         "settings": {
           "enable_bar": true,
           "status_text": "PRINTERS ONLINE",
-          "status_color": "#2d6a4f",
+          "status_color": "#3b82f6",
           "announcement": "Free shipping on orders over £50"
         }
       },
