@@ -1,7 +1,8 @@
 /* ================================================
    NEXUS-3D THEME  ·  CORE STYLESHEET
-   Material 3 Design System
-   Palette: M3 Dark · Primary #D0BCFF · Surface #1C1B1F
+   Linen & Steel Design System
+   Palette: Linen White #FDFCFB · Steel Blue #5C7285
+   Typography: Outfit · JetBrains Mono
    ================================================ */
 
 /* ── Reset ── */
@@ -13,16 +14,17 @@
 
 /* ── Base ── */
 html {
-  font-size: var(--nexus-font-size, 16px);
+  font-size: var(--nx-font-size, 16px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
 }
 
 body.nexus-body {
-  font-family: var(--nexus-font-body);
-  background-color: var(--nexus-bg);
-  color: var(--nexus-text);
+  font-family: var(--nx-font-body);
+  font-weight: var(--nx-body-weight, 500);
+  background-color: var(--nx-bg);
+  color: var(--nx-body);
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
@@ -35,11 +37,11 @@ img, video {
 }
 
 a {
-  color: var(--nexus-accent);
+  color: var(--nx-primary);
   text-decoration: none;
   transition: color .2s ease;
 }
-a:hover { color: var(--m3-on-primary-container); }
+a:hover { color: var(--nx-primary-hover); }
 
 /* ── Skip Link ── */
 .nexus-skip-link {
@@ -47,30 +49,39 @@ a:hover { color: var(--m3-on-primary-container); }
   top: -100%;
   left: 16px;
   padding: 8px 16px;
-  background: var(--nexus-accent);
-  color: var(--m3-on-primary);
+  background: var(--nx-primary);
+  color: var(--nx-on-primary);
   z-index: 10000;
-  border-radius: var(--m3-radius-full);
-  font-family: var(--nexus-font-mono);
+  border-radius: var(--nx-radius-pill);
+  font-family: var(--nx-font-mono);
   font-size: 12px;
 }
 .nexus-skip-link:focus {
   top: 16px;
 }
 
-/* ── Buttons — M3 Pill Shape ── */
+/* ── Headings ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--nx-font-heading);
+  font-weight: var(--nx-heading-weight, 800);
+  color: var(--nx-dark);
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+
+/* ── Buttons — Pill Shape ── */
 .nexus-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-family: var(--nexus-font-body);
+  font-family: var(--nx-font-body);
   font-size: 14px;
-  font-weight: 600;
-  letter-spacing: .02em;
-  padding: 14px 28px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  padding: 14px 32px;
   border: none;
-  border-radius: var(--m3-radius-full);
+  border-radius: var(--nx-radius-pill);
   cursor: pointer;
   transition: all .25s cubic-bezier(.2, 0, 0, 1);
   text-decoration: none;
@@ -80,17 +91,18 @@ a:hover { color: var(--m3-on-primary-container); }
 }
 
 .nexus-btn--primary {
-  background: var(--nexus-accent);
-  color: var(--m3-on-primary);
+  background: var(--nx-primary);
+  color: var(--nx-on-primary);
 }
 .nexus-btn--primary:hover {
-  background: var(--m3-on-primary-container);
-  box-shadow: var(--m3-elevation-2);
+  background: var(--nx-primary-hover);
+  box-shadow: var(--nx-shadow-md);
   transform: translateY(-1px);
+  color: var(--nx-on-primary);
 }
 .nexus-btn--primary:active {
   transform: translateY(0);
-  box-shadow: var(--m3-elevation-1);
+  box-shadow: var(--nx-shadow-sm);
 }
 .nexus-btn--primary:disabled {
   opacity: .38;
@@ -101,22 +113,25 @@ a:hover { color: var(--m3-on-primary-container); }
 
 .nexus-btn--outline {
   background: transparent;
-  color: var(--nexus-accent);
-  border: 1px solid var(--m3-outline);
+  color: var(--nx-primary);
+  border: 1.5px solid var(--nx-outline);
 }
 .nexus-btn--outline:hover {
-  background: rgba(208, 188, 255, .08);
-  border-color: var(--nexus-accent);
-  box-shadow: var(--m3-elevation-1);
+  background: var(--nx-primary-06);
+  border-color: var(--nx-primary);
+  box-shadow: var(--nx-shadow-sm);
+  color: var(--nx-primary);
 }
 
 .nexus-btn--tonal {
-  background: var(--m3-primary-container);
-  color: var(--m3-on-primary-container);
+  background: var(--nx-surface);
+  color: var(--nx-primary);
 }
 .nexus-btn--tonal:hover {
-  box-shadow: var(--m3-elevation-1);
+  background: var(--nx-surface-hover);
+  box-shadow: var(--nx-shadow-sm);
   transform: translateY(-1px);
+  color: var(--nx-primary);
 }
 
 .nexus-btn--full {
@@ -129,10 +144,15 @@ a:hover { color: var(--m3-on-primary-container); }
   font-size: 12px;
 }
 
+.nexus-btn--lg {
+  padding: 18px 40px;
+  font-size: 16px;
+}
+
 /* ── Selection ── */
 ::selection {
-  background: rgba(208, 188, 255, .3);
-  color: #fff;
+  background: rgba(92, 114, 133, .15);
+  color: var(--nx-dark);
 }
 
 /* ── Scrollbar ── */
@@ -140,14 +160,14 @@ a:hover { color: var(--m3-on-primary-container); }
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--nexus-bg);
+  background: var(--nx-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--m3-surface-variant);
+  background: var(--nx-outline);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--nexus-accent);
+  background: var(--nx-primary);
 }
 
 /* ── Utility Classes ── */
@@ -157,10 +177,10 @@ a:hover { color: var(--m3-on-primary-container); }
   padding: 0 32px;
 }
 .nexus-mono {
-  font-family: var(--nexus-font-mono);
+  font-family: var(--nx-font-mono);
 }
-.nexus-text-accent {
-  color: var(--nexus-accent);
+.nexus-text-primary {
+  color: var(--nx-primary);
 }
 .nexus-visually-hidden {
   position: absolute;
@@ -171,15 +191,15 @@ a:hover { color: var(--m3-on-primary-container); }
   border: 0;
 }
 
-/* ── M3 Surface Tint ── */
+/* ── M3 Surface Tint (light mode) ── */
 .m3-surface-1 {
-  background: color-mix(in srgb, var(--nexus-accent) 5%, var(--nexus-bg));
+  background: color-mix(in srgb, var(--nx-primary) 3%, var(--nx-bg));
 }
 .m3-surface-2 {
-  background: color-mix(in srgb, var(--nexus-accent) 8%, var(--nexus-bg));
+  background: color-mix(in srgb, var(--nx-primary) 5%, var(--nx-bg));
 }
 .m3-surface-3 {
-  background: color-mix(in srgb, var(--nexus-accent) 11%, var(--nexus-bg));
+  background: color-mix(in srgb, var(--nx-primary) 8%, var(--nx-bg));
 }
 
 /* ── Animations ── */
@@ -191,21 +211,49 @@ a:hover { color: var(--m3-on-primary-container); }
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes nexus-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+[data-nexus-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+}
+[data-nexus-animate].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* ── Main content spacing ── */
 .nexus-main {
   min-height: 60vh;
 }
 
-/* ── Focus Styles — M3 ── */
+/* ── Focus Styles ── */
 :focus-visible {
-  outline: 2px solid var(--nexus-accent);
+  outline: 2px solid var(--nx-primary);
   outline-offset: 2px;
 }
 
-/* ── Responsive padding bottom for mobile prototyper bar ── */
+/* ── Section spacing ── */
+.nexus-section {
+  padding: 96px 24px;
+}
+.nexus-section--compact {
+  padding: 48px 24px;
+}
+
+/* ── Responsive padding for mobile prototyper bar ── */
 @media (max-width: 768px) {
   .nexus-main {
     padding-bottom: 72px;
+  }
+  .nexus-section {
+    padding: 64px 16px;
+  }
+  .nexus-container {
+    padding: 0 16px;
   }
 }

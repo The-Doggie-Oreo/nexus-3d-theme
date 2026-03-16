@@ -1,11 +1,11 @@
-{%- comment -%} NEXUS-3D · FOOTER {%- endcomment -%}
+{%- comment -%} NEXUS-3D · FOOTER — Linen & Steel {%- endcomment -%}
 
 <footer class="nexus-footer">
   <div class="nexus-footer__inner">
     <div class="nexus-footer__grid">
 
       {%- comment -%} Brand Column {%- endcomment -%}
-      <div class="nexus-footer__col">
+      <div class="nexus-footer__col nexus-footer__col--brand">
         <span class="nexus-footer__brand">{{ shop.name }}</span>
         <p class="nexus-footer__tagline">{{ section.settings.tagline | default: 'Precision 3D printing for creators, engineers, and dreamers.' }}</p>
         <div class="nexus-footer__social">
@@ -40,8 +40,8 @@
 
 <style>
   .nexus-footer {
-    background: var(--m3-surface-container);
-    border-top: 1px solid var(--m3-outline-variant);
+    background: var(--nx-surface);
+    border-top: 1px solid var(--nx-outline);
     padding: 64px 32px 32px;
   }
   .nexus-footer__inner { max-width: 1440px; margin: 0 auto; }
@@ -52,64 +52,63 @@
     margin-bottom: 48px;
   }
   .nexus-footer__brand {
-    font-family: var(--nexus-font-heading);
-    font-weight: var(--nexus-heading-weight, 900);
-    font-size: 1.15rem;
-    color: #fff;
-    letter-spacing: -.02em;
+    font-family: var(--nx-font-heading);
+    font-weight: var(--nx-heading-weight, 800);
+    font-size: 1.2rem;
+    color: var(--nx-dark);
+    letter-spacing: -.03em;
   }
   .nexus-footer__tagline {
     font-size: .85rem;
-    color: var(--m3-on-surface-variant);
+    color: var(--nx-body);
     margin: 12px 0 16px;
     line-height: 1.5;
     max-width: 280px;
   }
   .nexus-footer__social { display: flex; gap: 8px; }
   .nexus-footer__social-link {
-    font-family: var(--nexus-font-mono);
+    font-family: var(--nx-font-mono);
     font-size: 11px;
     text-transform: uppercase;
     padding: 6px 14px;
-    border: 1px solid var(--m3-outline-variant);
-    border-radius: var(--m3-radius-full);
-    color: var(--m3-on-surface-variant);
+    border: 1px solid var(--nx-outline);
+    border-radius: var(--nx-radius-pill);
+    color: var(--nx-body);
     text-decoration: none;
     transition: all .25s cubic-bezier(.2, 0, 0, 1);
   }
   .nexus-footer__social-link:hover {
-    background: rgba(208,188,255,.08);
-    border-color: var(--nexus-accent);
-    color: var(--nexus-accent);
+    background: var(--nx-primary-06);
+    border-color: var(--nx-primary);
+    color: var(--nx-primary);
   }
   .nexus-footer__col-title {
-    font-family: var(--nexus-font-mono);
+    font-family: var(--nx-font-mono);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: .06em;
-    color: var(--nexus-accent);
+    color: var(--nx-primary);
     margin: 0 0 16px;
+    font-weight: 700;
   }
-  .nexus-footer__links {
-    list-style: none; margin: 0; padding: 0;
-  }
+  .nexus-footer__links { list-style: none; margin: 0; padding: 0; }
   .nexus-footer__links li { margin-bottom: 8px; }
   .nexus-footer__links a {
     font-size: .85rem;
-    color: var(--m3-on-surface-variant);
+    color: var(--nx-body);
     text-decoration: none;
     transition: color .2s;
   }
-  .nexus-footer__links a:hover { color: var(--nexus-accent); }
+  .nexus-footer__links a:hover { color: var(--nx-primary); }
   .nexus-footer__bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 24px;
-    border-top: 1px solid var(--m3-outline-variant);
-    font-family: var(--nexus-font-mono);
+    border-top: 1px solid var(--nx-outline);
+    font-family: var(--nx-font-mono);
     font-size: 11px;
-    color: var(--m3-on-surface-variant);
+    color: var(--nx-body);
     opacity: .45;
   }
 

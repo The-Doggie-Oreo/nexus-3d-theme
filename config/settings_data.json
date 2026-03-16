@@ -2,11 +2,13 @@
   "current": "Default",
   "presets": {
     "Default": {
-      "color_primary_bg": "#1C1B1F",
-      "color_accent": "#D0BCFF",
-      "color_text": "#E6E1E5",
-      "color_surface": "#2B2930",
-      "color_border": "#49454F",
+      "color_primary": "#5C7285",
+      "color_on_primary": "#FFFFFF",
+      "color_background": "#FDFCFB",
+      "color_surface": "#F1F0EC",
+      "color_outline": "#E1E2E5",
+      "color_dark": "#1A1C1E",
+      "color_body_text": "#44474A",
       "prototyper_enabled": true,
       "prototyper_cta_text": "Upload STL",
       "prototyper_quote_text": "Request Quote",

@@ -1,0 +1,120 @@
+{%- comment -%}
+  NEXUS-3D  ·  SECTION: TRUST & TECH STATS MARQUEE
+  Scrolling horizontal bar with monospaced stats
+{%- endcomment -%}
+
+<section class="nexus-marquee" data-section-type="trust-marquee">
+  <div class="nexus-marquee__track">
+    <div class="nexus-marquee__content">
+      {%- for block in section.blocks -%}
+        <span class="nexus-marquee__item" {{ block.shopify_attributes }}>
+          <span class="nexus-marquee__bracket">[</span>
+          <span class="nexus-marquee__label">{{ block.settings.label }}:</span>
+          <span class="nexus-marquee__value">{{ block.settings.value }}</span>
+          <span class="nexus-marquee__bracket">]</span>
+        </span>
+      {%- endfor -%}
+    </div>
+    {%- comment -%} Duplicate for seamless loop {%- endcomment -%}
+    <div class="nexus-marquee__content" aria-hidden="true">
+      {%- for block in section.blocks -%}
+        <span class="nexus-marquee__item">
+          <span class="nexus-marquee__bracket">[</span>
+          <span class="nexus-marquee__label">{{ block.settings.label }}:</span>
+          <span class="nexus-marquee__value">{{ block.settings.value }}</span>
+          <span class="nexus-marquee__bracket">]</span>
+        </span>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .nexus-marquee {
+    background: var(--nx-surface);
+    border-top: 1px solid var(--nx-outline);
+    border-bottom: 1px solid var(--nx-outline);
+    overflow: hidden;
+    padding: 18px 0;
+  }
+  .nexus-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: nexus-marquee 30s linear infinite;
+  }
+  .nexus-marquee__track:hover {
+    animation-play-state: paused;
+  }
+  .nexus-marquee__content {
+    display: flex;
+    gap: 48px;
+    padding-right: 48px;
+    flex-shrink: 0;
+  }
+  .nexus-marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--nx-font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    letter-spacing: .02em;
+  }
+  .nexus-marquee__bracket {
+    color: var(--nx-primary);
+    opacity: .5;
+  }
+  .nexus-marquee__label {
+    color: var(--nx-body);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-size: 11px;
+  }
+  .nexus-marquee__value {
+    color: var(--nx-dark);
+    font-weight: 700;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Trust Marquee",
+  "tag": "section",
+  "class": "nexus-section-marquee",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "PRINTERS"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "12"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Marquee",
+      "blocks": [
+        { "type": "stat", "settings": { "label": "PRINTERS", "value": "12" } },
+        { "type": "stat", "settings": { "label": "RES", "value": "0.02MM" } },
+        { "type": "stat", "settings": { "label": "SHIPPED", "value": "1,200+" } },
+        { "type": "stat", "settings": { "label": "EST", "value": "15MIN REPLY" } },
+        { "type": "stat", "settings": { "label": "MATERIALS", "value": "8 TYPES" } },
+        { "type": "stat", "settings": { "label": "UPTIME", "value": "99.2%" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

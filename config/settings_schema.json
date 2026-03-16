@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Nexus-3D",
-    "theme_version": "1.0.0",
+    "theme_version": "2.0.0",
     "theme_author": "Nexus Studio",
     "theme_documentation_url": "",
     "theme_support_url": ""
@@ -12,37 +12,49 @@
     "settings": [
       {
         "type": "header",
-        "content": "Nexus-3D · Material 3 Color Palette"
+        "content": "Nexus-3D · Linen & Steel Palette"
       },
       {
         "type": "color",
-        "id": "color_primary_bg",
-        "label": "Primary Background (M3 Dark Surface)",
-        "default": "#1C1B1F"
+        "id": "color_primary",
+        "label": "Primary (Steel Blue — Actions & CTAs)",
+        "default": "#5C7285"
       },
       {
         "type": "color",
-        "id": "color_accent",
-        "label": "Accent Color (M3 Primary Violet)",
-        "default": "#D0BCFF"
+        "id": "color_on_primary",
+        "label": "On-Primary (Text on Buttons)",
+        "default": "#FFFFFF"
       },
       {
         "type": "color",
-        "id": "color_text",
-        "label": "Text Color (M3 On-Surface)",
-        "default": "#E6E1E5"
+        "id": "color_background",
+        "label": "Background (Linen White)",
+        "default": "#FDFCFB"
       },
       {
         "type": "color",
         "id": "color_surface",
-        "label": "Surface / Card Color (M3 Container)",
-        "default": "#2B2930"
+        "label": "Surface (Warm Sand)",
+        "default": "#F1F0EC"
       },
       {
         "type": "color",
-        "id": "color_border",
-        "label": "Border / Divider Color (M3 Outline Variant)",
-        "default": "#49454F"
+        "id": "color_outline",
+        "label": "Outline / Borders",
+        "default": "#E1E2E5"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Dark / Heading Text (Charcoal)",
+        "default": "#1A1C1E"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Body Text",
+        "default": "#44474A"
       }
     ]
   },
@@ -57,20 +69,20 @@
         "type": "font_picker",
         "id": "font_heading",
         "label": "Heading Font",
-        "default": "inter_n9"
+        "default": "outfit_n8"
       },
       {
         "type": "font_picker",
         "id": "font_body",
         "label": "Body Font",
-        "default": "inter_n4"
+        "default": "outfit_n5"
       },
       {
         "type": "range",
         "id": "font_body_size",
         "label": "Base Font Size (px)",
-        "min": 12,
-        "max": 22,
+        "min": 14,
+        "max": 20,
         "step": 1,
         "default": 16
       }

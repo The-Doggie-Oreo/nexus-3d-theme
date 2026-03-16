@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-about",
+      "settings": {
+        "heading": "About Nexus-3D"
+      }
+    }
+  },
+  "order": ["main"]
+}

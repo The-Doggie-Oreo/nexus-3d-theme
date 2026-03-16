@@ -1,50 +1,34 @@
 {%- comment -%}
   ============================================================
-  NEXUS-3D  ·  SECTION: HERO 3D
-  Split-screen hero.
-    LEFT  → High-res print photo
-    RIGHT → Live printer status counter + recent ships
+  NEXUS-3D  ·  SECTION: THE "AURA" HERO
+  Full-width hero with large product image, gradient mask,
+  bold Outfit headline, and massive floating search bar.
   ============================================================
 {%- endcomment -%}
 
 {%- liquid
-  assign hero_image  = section.settings.hero_image
-  assign hero_video  = section.settings.hero_video
-  assign heading     = section.settings.heading
-  assign subheading  = section.settings.subheading
-  assign cta_label   = section.settings.cta_label
-  assign cta_link    = section.settings.cta_link
-  assign cta2_label  = section.settings.cta2_label
-  assign cta2_link   = section.settings.cta2_link
-  assign show_status = section.settings.show_printer_status
-  assign show_counter = section.settings.show_ship_counter
-  assign overlay_opacity = section.settings.overlay_opacity
+  assign hero_image   = section.settings.hero_image
+  assign heading      = section.settings.heading
+  assign subheading   = section.settings.subheading
+  assign cta_label    = section.settings.cta_label
+  assign cta_link     = section.settings.cta_link
+  assign cta2_label   = section.settings.cta2_label
+  assign cta2_link    = section.settings.cta2_link
+  assign show_search  = section.settings.show_search
 -%}
 
-<section
-  id="Hero3D-{{ section.id }}"
-  class="nexus-hero"
-  data-section-id="{{ section.id }}"
-  data-section-type="hero-3d"
->
-  {%- comment -%} ── LEFT PANEL: Media ── {%- endcomment -%}
-  <div class="nexus-hero__media">
-    {%- if hero_video != blank -%}
-      <video
-        class="nexus-hero__video"
-        autoplay muted loop playsinline
-        poster="{%- if hero_image != blank -%}{{ hero_image | image_url: width: 1920 }}{%- endif -%}"
-      >
-        <source src="{{ hero_video }}" type="video/mp4">
-      </video>
-    {%- elsif hero_image != blank -%}
+<section id="HeroAura-{{ section.id }}" class="nexus-aura" data-section-type="hero-aura">
+
+  {%- comment -%} Background image with gradient mask {%- endcomment -%}
+  <div class="nexus-aura__media">
+    {%- if hero_image != blank -%}
       <img
-        class="nexus-hero__image"
+        class="nexus-aura__image"
         src="{{ hero_image | image_url: width: 1920 }}"
         srcset="{{ hero_image | image_url: width: 960 }} 960w,
                 {{ hero_image | image_url: width: 1440 }} 1440w,
                 {{ hero_image | image_url: width: 1920 }} 1920w"
-        sizes="(max-width: 768px) 100vw, 50vw"
+        sizes="100vw"
         alt="{{ hero_image.alt | escape }}"
         loading="eager"
         fetchpriority="high"
@@ -52,473 +36,271 @@
         height="{{ hero_image.height }}"
       >
     {%- else -%}
-      <div class="nexus-hero__placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        <span>Upload hero media in theme editor</span>
-      </div>
+      <div class="nexus-aura__placeholder"></div>
     {%- endif -%}
-
-    {%- comment -%} Gradient overlay for left panel {%- endcomment -%}
-    <div class="nexus-hero__overlay" style="opacity: {{ overlay_opacity | divided_by: 100.0 }};"></div>
+    <div class="nexus-aura__gradient"></div>
   </div>
 
-  {%- comment -%} ── RIGHT PANEL: Content + Status ── {%- endcomment -%}
-  <div class="nexus-hero__content">
-
-    {%- comment -%} Blueprint-style decorative grid lines {%- endcomment -%}
-    <div class="nexus-hero__grid-lines" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-
-    <div class="nexus-hero__inner">
+  {%- comment -%} Content overlay {%- endcomment -%}
+  <div class="nexus-aura__content">
+    <div class="nexus-aura__inner">
 
       {%- comment -%} Badge {%- endcomment -%}
-      <div class="nexus-hero__badge">
-        <span class="nexus-hero__badge-dot"></span>
-        <span class="nexus-hero__badge-text">Nexus-3D Studio</span>
+      <div class="nexus-aura__badge">
+        <span class="nexus-aura__badge-dot"></span>
+        <span>{{ section.settings.badge_text | default: 'Now Accepting Orders' }}</span>
       </div>
 
-      {%- comment -%} Heading {%- endcomment -%}
+      {%- comment -%} Headline {%- endcomment -%}
       {%- if heading != blank -%}
-        <h1 class="nexus-hero__heading">{{ heading }}</h1>
+        <h1 class="nexus-aura__heading">{{ heading }}</h1>
       {%- endif -%}
 
       {%- comment -%} Subheading {%- endcomment -%}
       {%- if subheading != blank -%}
-        <p class="nexus-hero__subheading">{{ subheading }}</p>
+        <p class="nexus-aura__subheading">{{ subheading }}</p>
+      {%- endif -%}
+
+      {%- comment -%} Search bar {%- endcomment -%}
+      {%- if show_search -%}
+        <div class="nexus-aura__search">
+          <form action="{{ routes.search_url }}" method="get" role="search" class="nexus-aura__search-form">
+            <svg class="nexus-aura__search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input
+              type="search"
+              name="q"
+              class="nexus-aura__search-input"
+              placeholder="Search prints, materials, prototypes..."
+              autocomplete="off"
+            >
+            <button type="submit" class="nexus-btn nexus-btn--primary nexus-btn--sm nexus-aura__search-btn">Search</button>
+          </form>
+        </div>
       {%- endif -%}
 
       {%- comment -%} CTAs {%- endcomment -%}
-      <div class="nexus-hero__ctas">
+      <div class="nexus-aura__ctas">
         {%- if cta_label != blank -%}
-          <a href="{{ cta_link }}" class="nexus-btn nexus-btn--primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            {{ cta_label }}
-          </a>
+          <a href="{{ cta_link }}" class="nexus-btn nexus-btn--primary nexus-btn--lg">{{ cta_label }}</a>
         {%- endif -%}
         {%- if cta2_label != blank -%}
-          <a href="{{ cta2_link }}" class="nexus-btn nexus-btn--outline">
-            {{ cta2_label }}
-          </a>
+          <a href="{{ cta2_link }}" class="nexus-btn nexus-btn--outline nexus-btn--lg">{{ cta2_label }}</a>
         {%- endif -%}
       </div>
 
-      {%- comment -%} ── STATUS DASHBOARD ── {%- endcomment -%}
-      <div class="nexus-hero__dashboard">
-
-        {%- if show_status -%}
-          {%- comment -%} Printer Status Indicator {%- endcomment -%}
-          <div class="nexus-hero__status-card" data-status="{{ settings.printer_status }}">
-            <div class="nexus-hero__status-indicator">
-              <span class="nexus-hero__status-pulse"></span>
-            </div>
-            <div class="nexus-hero__status-info">
-              <span class="nexus-hero__status-label">Printer Status</span>
-              <span class="nexus-hero__status-value">
-                {%- case settings.printer_status -%}
-                  {%- when 'printing' -%}🟢 Printing
-                  {%- when 'idle' -%}🟡 Idle — Ready
-                  {%- when 'maintenance' -%}🔴 Maintenance
-                {%- endcase -%}
-              </span>
-              {%- if settings.printer_status_custom != blank -%}
-                <span class="nexus-hero__status-msg">{{ settings.printer_status_custom }}</span>
-              {%- endif -%}
-            </div>
-          </div>
-        {%- endif -%}
-
-        {%- if show_counter -%}
-          {%- comment -%} Live Ship Counter {%- endcomment -%}
-          <div class="nexus-hero__counter-card">
-            <div class="nexus-hero__counter-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-            </div>
-            <div class="nexus-hero__counter-info">
-              <span class="nexus-hero__counter-number" data-target="{{ settings.total_prints_shipped }}">0</span>
-              <span class="nexus-hero__counter-label">Prints Shipped</span>
-            </div>
-          </div>
-        {%- endif -%}
-
-        {%- comment -%} Recent Ships / Orders {%- endcomment -%}
-        {%- if section.blocks.size > 0 -%}
-          <div class="nexus-hero__recent-ships">
-            <span class="nexus-hero__recent-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              Recent Ships
-            </span>
-            <ul class="nexus-hero__recent-list">
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'recent_ship' -%}
-                  <li class="nexus-hero__recent-item" {{ block.shopify_attributes }}>
-                    <span class="nexus-hero__recent-name">{{ block.settings.project_name }}</span>
-                    <span class="nexus-hero__recent-date">{{ block.settings.ship_date }}</span>
-                  </li>
-                {%- endif -%}
-              {%- endfor -%}
-            </ul>
-          </div>
-        {%- endif -%}
-
-      </div>
     </div>
   </div>
 </section>
 
 <style>
-  /* ================================================
-     HERO 3D — M3 Scoped Styles
-     ================================================ */
-  .nexus-hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-    min-height: 100dvh;
-    overflow: hidden;
+  .nexus-aura {
     position: relative;
-    background: var(--nexus-bg);
+    min-height: 90vh;
+    min-height: 90dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--nx-bg);
   }
 
-  /* ── LEFT: Media Panel ── */
-  .nexus-hero__media {
-    position: relative;
-    overflow: hidden;
-  }
-  .nexus-hero__image,
-  .nexus-hero__video {
+  /* Background image */
+  .nexus-aura__media {
     position: absolute;
     inset: 0;
+  }
+  .nexus-aura__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: .35;
   }
-  .nexus-hero__placeholder {
+  .nexus-aura__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--nx-surface) 0%, var(--nx-bg) 100%);
+  }
+  .nexus-aura__gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(253,252,251,0.3) 0%,
+      rgba(253,252,251,0.75) 40%,
+      rgba(253,252,251,0.95) 70%,
+      var(--nx-bg) 100%
+    );
+  }
+
+  /* Content */
+  .nexus-aura__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 80px 24px 60px;
+  }
+  .nexus-aura__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--nexus-text);
-    opacity: .3;
-    gap: 16px;
-  }
-  .nexus-hero__placeholder svg { width: 64px; height: 64px; }
-  .nexus-hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(208,188,255,.1), var(--nexus-bg));
-    pointer-events: none;
+    gap: 0;
   }
 
-  /* ── RIGHT: Content Panel — M3 Surface Tint ── */
-  .nexus-hero__content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 60px 48px;
-    background: var(--nexus-bg);
-    overflow: hidden;
-  }
-
-  /* Blueprint grid-line decoration — M3 tinted */
-  .nexus-hero__grid-lines {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: .03;
-  }
-  .nexus-hero__grid-lines span {
-    position: absolute;
-    background: var(--nexus-accent);
-  }
-  .nexus-hero__grid-lines span:nth-child(1) { top: 20%; left: 0; right: 0; height: 1px; }
-  .nexus-hero__grid-lines span:nth-child(2) { top: 40%; left: 0; right: 0; height: 1px; }
-  .nexus-hero__grid-lines span:nth-child(3) { top: 60%; left: 0; right: 0; height: 1px; }
-  .nexus-hero__grid-lines span:nth-child(4) { left: 33%; top: 0; bottom: 0; width: 1px; }
-  .nexus-hero__grid-lines span:nth-child(5) { left: 66%; top: 0; bottom: 0; width: 1px; }
-
-  .nexus-hero__inner {
-    position: relative;
-    z-index: 2;
-    max-width: 560px;
-    width: 100%;
-  }
-
-  /* Badge — M3 Pill */
-  .nexus-hero__badge {
+  /* Badge */
+  .nexus-aura__badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 6px 16px;
-    border: 1px solid var(--m3-outline-variant);
-    border-radius: var(--m3-radius-full);
-    background: var(--m3-surface-container);
-    backdrop-filter: blur(16px);
-    font-family: var(--nexus-font-body);
-    font-size: 12px;
+    border: 1px solid var(--nx-outline);
+    border-radius: var(--nx-radius-pill);
+    background: var(--nx-bg);
+    font-family: var(--nx-font-mono);
+    font-size: 11px;
     font-weight: 500;
-    color: var(--nexus-accent);
-    letter-spacing: .02em;
-    margin-bottom: 28px;
+    color: var(--nx-primary);
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    box-shadow: var(--nx-shadow-sm);
   }
-  .nexus-hero__badge-dot {
+  .nexus-aura__badge-dot {
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: var(--nexus-accent);
+    background: #22c55e;
     animation: nexus-pulse 2s ease-in-out infinite;
   }
 
-  /* Heading — M3 Display Large (Weight 900, bigger clamp) */
-  .nexus-hero__heading {
-    font-family: var(--nexus-font-heading);
-    font-weight: var(--nexus-heading-weight, 900);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  /* Heading */
+  .nexus-aura__heading {
+    font-family: var(--nx-font-heading);
+    font-weight: var(--nx-heading-weight, 800);
+    font-size: clamp(2.5rem, 6vw, 5rem);
     line-height: 1.05;
-    color: #fff;
+    color: var(--nx-dark);
     margin: 0 0 20px;
-    letter-spacing: -.03em;
-  }
-  .nexus-hero__subheading {
-    font-family: var(--nexus-font-body);
-    font-size: 1.15rem;
-    color: var(--m3-on-surface-variant);
-    line-height: 1.65;
-    margin: 0 0 36px;
+    letter-spacing: -.04em;
+    text-transform: uppercase;
   }
 
-  /* CTAs — M3 Pill Buttons */
-  .nexus-hero__ctas {
+  .nexus-aura__subheading {
+    font-family: var(--nx-font-body);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--nx-body);
+    line-height: 1.65;
+    margin: 0 0 40px;
+    max-width: 560px;
+  }
+
+  /* Floating Search Bar */
+  .nexus-aura__search {
+    width: 100%;
+    max-width: 640px;
+    margin-bottom: 32px;
+  }
+  .nexus-aura__search-form {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--nx-bg);
+    border: 1.5px solid var(--nx-outline);
+    border-radius: var(--nx-radius-pill);
+    padding: 6px 6px 6px 20px;
+    box-shadow: var(--nx-shadow-lg);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .nexus-aura__search-form:focus-within {
+    border-color: var(--nx-primary);
+    box-shadow: var(--nx-shadow-xl), 0 0 0 3px var(--nx-primary-10);
+  }
+  .nexus-aura__search-icon {
+    color: var(--nx-body);
+    opacity: .4;
+    flex-shrink: 0;
+  }
+  .nexus-aura__search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: var(--nx-font-body);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--nx-dark);
+    padding: 12px 16px;
+    outline: none;
+  }
+  .nexus-aura__search-input::placeholder {
+    color: var(--nx-body);
+    opacity: .45;
+  }
+  .nexus-aura__search-btn {
+    flex-shrink: 0;
+    padding: 12px 24px;
+  }
+
+  /* CTAs */
+  .nexus-aura__ctas {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
-    margin-bottom: 48px;
+    justify-content: center;
   }
 
-  /* Dashboard — M3 Container */
-  .nexus-hero__dashboard {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-top: 28px;
-    border-top: 1px solid var(--m3-outline-variant);
-  }
-
-  /* Status Card — M3 28px Radius + Glassmorphism */
-  .nexus-hero__status-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 22px;
-    background: var(--m3-surface-container-high);
-    border: 1px solid var(--m3-outline-variant);
-    border-radius: var(--m3-radius-xl);
-    backdrop-filter: blur(8px);
-    transition: box-shadow .25s;
-  }
-  .nexus-hero__status-card:hover {
-    box-shadow: var(--m3-elevation-1);
-  }
-  .nexus-hero__status-indicator { position: relative; width: 12px; height: 12px; }
-  .nexus-hero__status-pulse {
-    display: block;
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--nexus-accent);
-  }
-  .nexus-hero__status-card[data-status="printing"] .nexus-hero__status-pulse { background: #22c55e; }
-  .nexus-hero__status-card[data-status="idle"]     .nexus-hero__status-pulse { background: #eab308; }
-  .nexus-hero__status-card[data-status="maintenance"] .nexus-hero__status-pulse { background: #ef4444; }
-
-  .nexus-hero__status-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .nexus-hero__status-label {
-    font-family: var(--nexus-font-mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--m3-on-surface-variant);
-    opacity: .7;
-  }
-  .nexus-hero__status-value {
-    font-family: var(--nexus-font-heading);
-    font-size: 14px;
-    color: #fff;
-    font-weight: 600;
-  }
-  .nexus-hero__status-msg {
-    font-size: 12px;
-    color: var(--m3-on-surface-variant);
-    opacity: .6;
-  }
-
-  /* Counter Card — M3 */
-  .nexus-hero__counter-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 22px;
-    background: var(--m3-surface-container-high);
-    border: 1px solid var(--m3-outline-variant);
-    border-radius: var(--m3-radius-xl);
-    transition: box-shadow .25s;
-  }
-  .nexus-hero__counter-card:hover {
-    box-shadow: var(--m3-elevation-1);
-  }
-  .nexus-hero__counter-icon { color: var(--nexus-accent); }
-  .nexus-hero__counter-info { display: flex; flex-direction: column; }
-  .nexus-hero__counter-number {
-    font-family: var(--nexus-font-heading);
-    font-size: 32px;
-    font-weight: var(--nexus-heading-weight, 900);
-    color: var(--nexus-accent);
-    letter-spacing: -.02em;
-  }
-  .nexus-hero__counter-label {
-    font-family: var(--nexus-font-mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--m3-on-surface-variant);
-    opacity: .6;
-  }
-
-  /* Recent Ships — M3 */
-  .nexus-hero__recent-ships {
-    padding: 18px 22px;
-    background: var(--m3-surface-container-high);
-    border: 1px solid var(--m3-outline-variant);
-    border-radius: var(--m3-radius-xl);
-    transition: box-shadow .25s;
-  }
-  .nexus-hero__recent-ships:hover {
-    box-shadow: var(--m3-elevation-1);
-  }
-  .nexus-hero__recent-title {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--nexus-font-mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    color: var(--nexus-accent);
-    margin-bottom: 12px;
-  }
-  .nexus-hero__recent-list { list-style: none; margin: 0; padding: 0; }
-  .nexus-hero__recent-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    font-size: 13px;
-    border-bottom: 1px solid var(--m3-outline-variant);
-  }
-  .nexus-hero__recent-item:last-child { border-bottom: none; }
-  .nexus-hero__recent-name { color: var(--nexus-text); }
-  .nexus-hero__recent-date {
-    color: var(--m3-on-surface-variant);
-    opacity: .5;
-    font-family: var(--nexus-font-mono);
-    font-size: 11px;
-  }
-
-  /* ── Animations ── */
   @keyframes nexus-pulse {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: .5; transform: scale(1.4); }
+    50%      { opacity: .5; transform: scale(1.5); }
   }
 
-  /* ── Responsive ── */
-  @media (max-width: 960px) {
-    .nexus-hero {
-      grid-template-columns: 1fr;
-      min-height: auto;
+  @media (max-width: 768px) {
+    .nexus-aura {
+      min-height: 80vh;
     }
-    .nexus-hero__media {
-      min-height: 50vh;
+    .nexus-aura__content {
+      padding: 60px 16px 40px;
     }
-    .nexus-hero__content {
-      padding: 40px 24px;
+    .nexus-aura__heading {
+      font-size: clamp(2rem, 8vw, 3rem);
     }
   }
 </style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // ── Animated counter ──
-    const counters = document.querySelectorAll('.nexus-hero__counter-number');
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.dataset.target, 10) || 0;
-          let current = 0;
-          const duration = 2000;
-          const step = Math.ceil(target / (duration / 16));
-          const tick = function () {
-            current += step;
-            if (current >= target) { el.textContent = target.toLocaleString(); return; }
-            el.textContent = current.toLocaleString();
-            requestAnimationFrame(tick);
-          };
-          tick();
-          observer.unobserve(el);
-        }
-      });
-    }, { threshold: 0.3 });
-    counters.forEach(function (c) { observer.observe(c); });
-  });
-</script>
-
 {% schema %}
 {
-  "name": "Hero 3D",
+  "name": "Aura Hero",
   "tag": "section",
   "class": "nexus-section-hero",
   "limit": 1,
   "settings": [
     {
-      "type": "header",
-      "content": "Media (Left Panel)"
-    },
-    {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero Image"
+      "label": "Hero Background Image"
     },
     {
-      "type": "url",
-      "id": "hero_video",
-      "label": "Hero Video URL (MP4)"
-    },
-    {
-      "type": "range",
-      "id": "overlay_opacity",
-      "label": "Overlay Opacity (%)",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "default": 40
-    },
-    {
-      "type": "header",
-      "content": "Content (Right Panel)"
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "Now Accepting Orders"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Precision Prints. Delivered."
+      "default": "PRECISION PRINTS. DELIVERED."
     },
     {
       "type": "textarea",
       "id": "subheading",
       "label": "Subheading",
       "default": "From concept file to finished prototype — industrial-grade 3D printing for creators, engineers, and dreamers."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Bar",
+      "default": true
     },
     {
       "type": "text",
@@ -541,53 +323,11 @@
       "type": "url",
       "id": "cta2_link",
       "label": "Secondary CTA Link"
-    },
-    {
-      "type": "header",
-      "content": "Status Dashboard"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_printer_status",
-      "label": "Show Printer Status",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_ship_counter",
-      "label": "Show Ship Counter",
-      "default": true
-    }
-  ],
-  "blocks": [
-    {
-      "type": "recent_ship",
-      "name": "Recent Ship",
-      "limit": 5,
-      "settings": [
-        {
-          "type": "text",
-          "id": "project_name",
-          "label": "Project Name",
-          "default": "Prototype Alpha-7"
-        },
-        {
-          "type": "text",
-          "id": "ship_date",
-          "label": "Ship Date",
-          "default": "Mar 14"
-        }
-      ]
     }
   ],
   "presets": [
     {
-      "name": "Hero 3D",
-      "blocks": [
-        { "type": "recent_ship", "settings": { "project_name": "Prototype Alpha-7", "ship_date": "Mar 14" } },
-        { "type": "recent_ship", "settings": { "project_name": "Drone Housing v3", "ship_date": "Mar 12" } },
-        { "type": "recent_ship", "settings": { "project_name": "Cosplay Helmet — Iron", "ship_date": "Mar 10" } }
-      ]
+      "name": "Aura Hero"
     }
   ]
 }

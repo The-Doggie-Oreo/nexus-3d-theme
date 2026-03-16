@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-materials",
+      "settings": {
+        "heading": "The Material Lab",
+        "subheading": "Deep-dive into every material we offer. Compare properties, discover what's best for your project."
+      }
+    }
+  },
+  "order": ["main"]
+}

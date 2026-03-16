@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-portfolio",
+      "settings": {
+        "heading": "Our Work",
+        "subheading": "Precision engineering meets creative design. Every project tells a story of innovation."
+      }
+    }
+  },
+  "order": ["main"]
+}

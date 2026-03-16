@@ -1,0 +1,164 @@
+{%- comment -%}
+  NEXUS-3D  ·  SECTION: FAQ ACCORDION
+  Clean M3 accordions with plus/minus toggle icons
+{%- endcomment -%}
+
+<section class="nexus-faq nexus-section" data-section-type="faq-accordion">
+  <div class="nexus-faq__inner nexus-container">
+
+    <div class="nexus-faq__header" data-nexus-animate>
+      <h2 class="nexus-faq__title">{{ section.settings.heading | default: 'Frequently Asked Questions' }}</h2>
+      <p class="nexus-faq__subtitle">{{ section.settings.subheading | default: 'Everything you need to know about our 3D printing services.' }}</p>
+    </div>
+
+    <div class="nexus-faq__list" data-nexus-animate>
+      {%- for block in section.blocks -%}
+        <div class="nexus-faq__item" {{ block.shopify_attributes }}>
+          <button class="nexus-faq__question" aria-expanded="false">
+            <span class="nexus-faq__question-text">{{ block.settings.question }}</span>
+            <span class="nexus-faq__icon">
+              <svg class="nexus-faq__icon-plus" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg class="nexus-faq__icon-minus" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </span>
+          </button>
+          <div class="nexus-faq__answer">
+            <div class="nexus-faq__answer-content">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .nexus-faq__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .nexus-faq__title {
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    margin: 0 0 12px;
+  }
+  .nexus-faq__subtitle {
+    font-size: 1.05rem;
+    color: var(--nx-body);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.65;
+  }
+
+  .nexus-faq__list {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .nexus-faq__item {
+    border-bottom: 1px solid var(--nx-outline);
+  }
+  .nexus-faq__item:first-child {
+    border-top: 1px solid var(--nx-outline);
+  }
+
+  .nexus-faq__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 24px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--nx-font-heading);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--nx-dark);
+    transition: color .2s;
+    gap: 16px;
+  }
+  .nexus-faq__question:hover {
+    color: var(--nx-primary);
+  }
+
+  .nexus-faq__icon {
+    flex-shrink: 0;
+    color: var(--nx-body);
+    opacity: .4;
+    transition: opacity .2s;
+  }
+  .nexus-faq__question:hover .nexus-faq__icon { opacity: .8; }
+
+  .nexus-faq__icon-minus { display: none; }
+  .nexus-faq__item.is-open .nexus-faq__icon-plus { display: none; }
+  .nexus-faq__item.is-open .nexus-faq__icon-minus { display: block; }
+
+  .nexus-faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s cubic-bezier(.22,1,.36,1);
+  }
+  .nexus-faq__answer-content {
+    padding: 0 0 24px;
+    font-size: .95rem;
+    color: var(--nx-body);
+    line-height: 1.7;
+    max-width: 640px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "tag": "section",
+  "class": "nexus-section-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Everything you need to know about our 3D printing services."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What file formats do you accept?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>We accept STL, OBJ, STEP, STP, 3MF, and most common 3D file formats. If you have a different format, just send it over and we'll convert it for you.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "What file formats do you accept?", "answer": "<p>We accept STL, OBJ, STEP, STP, 3MF, and most common 3D file formats. If you have a different format, just send it over and we'll convert it for you.</p>" } },
+        { "type": "faq", "settings": { "question": "How much does 3D printing cost?", "answer": "<p>Pricing depends on material, size, and complexity. Upload your file for an instant quote, or contact us for custom project pricing. Most small parts start around $15.</p>" } },
+        { "type": "faq", "settings": { "question": "What materials do you offer?", "answer": "<p>We stock PLA, PETG, ABS, Nylon, TPU, and multiple SLA resins. Visit our Materials page for a full breakdown of properties and use cases.</p>" } },
+        { "type": "faq", "settings": { "question": "How long does shipping take?", "answer": "<p>Standard orders ship within 5-7 business days. Rush orders (2-3 days) and same-day service are available for an additional fee. We ship worldwide.</p>" } },
+        { "type": "faq", "settings": { "question": "Can you paint or finish my print?", "answer": "<p>Yes! We offer sanding, priming, and full paint services. Select your preferred finish level during checkout or specify details in the Design Notes field.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

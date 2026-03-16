@@ -4,18 +4,15 @@
       "type": "product-tech-specs",
       "settings": {},
       "blocks": {
-        "spec_1": { "type": "spec", "settings": { "spec_label": "Layer Height", "spec_value": "0.1mm" } },
-        "spec_2": { "type": "spec", "settings": { "spec_label": "Resolution", "spec_value": "50 microns" } },
-        "spec_3": { "type": "spec", "settings": { "spec_label": "Infill", "spec_value": "20%" } },
-        "spec_4": { "type": "spec", "settings": { "spec_label": "Build Volume", "spec_value": "256×256×256mm" } },
-        "spec_5": { "type": "spec", "settings": { "spec_label": "Print Time", "spec_value": "~12 hours" } },
-        "spec_6": { "type": "spec", "settings": { "spec_label": "Weight", "spec_value": "145g" } },
-        "mat_1": { "type": "material_option", "settings": { "material_name": "PLA", "material_color": "#22c55e" } },
-        "mat_2": { "type": "material_option", "settings": { "material_name": "PETG", "material_color": "#3b82f6" } },
-        "mat_3": { "type": "material_option", "settings": { "material_name": "Resin", "material_color": "#f59e0b" } },
-        "mat_4": { "type": "material_option", "settings": { "material_name": "ABS", "material_color": "#ef4444" } }
+        "spec-1": { "type": "spec", "settings": { "spec_label": "Layer Height", "spec_value": "0.1mm" }},
+        "spec-2": { "type": "spec", "settings": { "spec_label": "Infill", "spec_value": "20%" }},
+        "spec-3": { "type": "spec", "settings": { "spec_label": "Tolerance", "spec_value": "±0.2mm" }},
+        "spec-4": { "type": "spec", "settings": { "spec_label": "Build Time", "spec_value": "~8 hrs" }},
+        "mat-1": { "type": "material_option", "settings": { "material_name": "PLA", "material_color": "#5C7285" }},
+        "mat-2": { "type": "material_option", "settings": { "material_name": "PETG", "material_color": "#3B82F6" }},
+        "mat-3": { "type": "material_option", "settings": { "material_name": "Nylon", "material_color": "#2D6A4F" }}
       },
-      "block_order": ["spec_1", "spec_2", "spec_3", "spec_4", "spec_5", "spec_6", "mat_1", "mat_2", "mat_3", "mat_4"]
+      "block_order": ["spec-1","spec-2","spec-3","spec-4","mat-1","mat-2","mat-3"]
     }
   },
   "order": ["main"]

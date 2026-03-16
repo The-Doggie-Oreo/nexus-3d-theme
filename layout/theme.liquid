@@ -15,10 +15,10 @@
 
   <link rel="canonical" href="{{ canonical_url }}">
 
-  {%- comment -%} ===== Fonts ===== {%- endcomment -%}
+  {%- comment -%} ===== Fonts: Outfit + JetBrains Mono ===== {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   {%- comment -%} ===== Theme CSS ===== {%- endcomment -%}
   {{ 'nexus-core.css' | asset_url | stylesheet_tag }}
@@ -26,51 +26,50 @@
   {%- comment -%} ===== Shopify Defaults ===== {%- endcomment -%}
   {{ content_for_header }}
 
-  {%- comment -%} ===== CSS Custom Properties from settings ===== {%- endcomment -%}
+  {%- comment -%} ===== Linen & Steel Design Tokens ===== {%- endcomment -%}
   <style>
     :root {
-      /* ── M3 Core Tokens ── */
-      --nexus-bg:        {{ settings.color_primary_bg }};
-      --nexus-accent:    {{ settings.color_accent }};
-      --nexus-text:      {{ settings.color_text }};
-      --nexus-surface:   {{ settings.color_surface }};
-      --nexus-border:    {{ settings.color_border }};
+      /* ── Linen & Steel Palette ── */
+      --nx-primary:       {{ settings.color_primary }};
+      --nx-on-primary:    {{ settings.color_on_primary }};
+      --nx-bg:            {{ settings.color_background }};
+      --nx-surface:       {{ settings.color_surface }};
+      --nx-outline:       {{ settings.color_outline }};
+      --nx-dark:          {{ settings.color_dark }};
+      --nx-body:          {{ settings.color_body_text }};
 
-      /* ── M3 Extended Palette ── */
-      --m3-primary:      #D0BCFF;
-      --m3-on-primary:   #381E72;
-      --m3-primary-container: #4F378B;
-      --m3-on-primary-container: #EADDFF;
-      --m3-surface-variant: #49454F;
-      --m3-on-surface-variant: #CAC4D0;
-      --m3-surface-container: #211F26;
-      --m3-surface-container-high: #2B2930;
-      --m3-outline: #938F99;
-      --m3-outline-variant: #49454F;
+      /* ── Derived Tones ── */
+      --nx-primary-hover: #4A6070;
+      --nx-surface-hover: #E8E7E3;
+      --nx-primary-10:    rgba(92, 114, 133, 0.10);
+      --nx-primary-06:    rgba(92, 114, 133, 0.06);
+      --nx-primary-04:    rgba(92, 114, 133, 0.04);
 
       /* ── Typography ── */
-      --nexus-font-body: 'Inter', {{ settings.font_body.family }}, sans-serif;
-      --nexus-font-heading: 'Inter', {{ settings.font_heading.family }}, sans-serif;
-      --nexus-font-mono: 'JetBrains Mono', monospace;
-      --nexus-font-size: {{ settings.font_body_size }}px;
-      --nexus-heading-weight: 900;
+      --nx-font-body:     'Outfit', {{ settings.font_body.family }}, sans-serif;
+      --nx-font-heading:  'Outfit', {{ settings.font_heading.family }}, sans-serif;
+      --nx-font-mono:     'JetBrains Mono', monospace;
+      --nx-font-size:     {{ settings.font_body_size }}px;
+      --nx-heading-weight: 800;
+      --nx-body-weight:    500;
+      --nx-label-weight:   700;
 
-      /* ── M3 Shape System ── */
-      --nexus-radius:    28px;
-      --m3-radius-xl:    28px;
-      --m3-radius-lg:    16px;
-      --m3-radius-md:    12px;
-      --m3-radius-sm:    8px;
-      --m3-radius-full:  999px;
+      /* ── Shape System ── */
+      --nx-radius-xl:     32px;
+      --nx-radius-lg:     24px;
+      --nx-radius-md:     16px;
+      --nx-radius-sm:     8px;
+      --nx-radius-pill:   999px;
 
-      /* ── M3 Glassmorphism ── */
-      --nexus-glass:     rgba(28, 27, 31, 0.72);
-      --nexus-glass-border: rgba(208, 188, 255, 0.08);
+      /* ── Glassmorphism ── */
+      --nx-glass:         rgba(253, 252, 251, 0.80);
+      --nx-glass-border:  rgba(225, 226, 229, 0.60);
 
-      /* ── M3 Elevation (tonal) ── */
-      --m3-elevation-1:  0 1px 3px 1px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.3);
-      --m3-elevation-2:  0 2px 6px 2px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.3);
-      --m3-elevation-3:  0 4px 8px 3px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.3);
+      /* ── Soft Elevation ── */
+      --nx-shadow-sm:     0 1px 6px rgba(0,0,0,0.02);
+      --nx-shadow-md:     0 4px 20px rgba(0,0,0,0.03);
+      --nx-shadow-lg:     0 8px 32px rgba(0,0,0,0.05);
+      --nx-shadow-xl:     0 12px 48px rgba(0,0,0,0.06);
     }
   </style>
 </head>

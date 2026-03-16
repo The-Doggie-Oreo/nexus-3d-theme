@@ -1,43 +1,85 @@
 {
   "sections": {
+    "prototyper-bar": {
+      "type": "prototyper-bar",
+      "settings": {
+        "enable_bar": true,
+        "status_text": "PRINTERS ONLINE",
+        "status_color": "#2D6A4F",
+        "announcement": "Free shipping on orders over £50"
+      }
+    },
     "hero": {
       "type": "section-hero-3d",
       "settings": {
-        "heading": "Precision Prints. Delivered.",
-        "subheading": "From concept file to finished prototype — industrial-grade 3D printing for creators, engineers, and dreamers.",
-        "cta_label": "Upload STL",
-        "cta2_label": "Browse Catalog",
-        "show_printer_status": true,
-        "show_ship_counter": true,
-        "overlay_opacity": 40
-      },
-      "blocks": {
-        "ship_1": { "type": "recent_ship", "settings": { "project_name": "Prototype Alpha-7", "ship_date": "Mar 14" } },
-        "ship_2": { "type": "recent_ship", "settings": { "project_name": "Drone Housing v3", "ship_date": "Mar 12" } },
-        "ship_3": { "type": "recent_ship", "settings": { "project_name": "Cosplay Helmet — Iron", "ship_date": "Mar 10" } }
-      },
-      "block_order": ["ship_1", "ship_2", "ship_3"]
+        "badge_text": "Now Accepting Orders",
+        "heading": "PRECISION PRINTS. DELIVERED.",
+        "subheading": "From prototype to production — engineered 3D printing for creators, engineers and businesses.",
+        "show_search": true,
+        "cta_primary_text": "Get a Quote",
+        "cta_primary_link": "",
+        "cta_secondary_text": "Our Work",
+        "cta_secondary_link": ""
+      }
     },
-    "portfolio": {
+    "trust-marquee": {
+      "type": "section-trust-marquee",
+      "settings": {},
+      "blocks": {
+        "stat-1": { "type": "stat", "settings": { "label": "PRINTERS", "value": "12" }},
+        "stat-2": { "type": "stat", "settings": { "label": "RESOLUTION", "value": "0.02MM" }},
+        "stat-3": { "type": "stat", "settings": { "label": "SHIPPED", "value": "1,200+" }},
+        "stat-4": { "type": "stat", "settings": { "label": "EST. REPLY", "value": "15 MIN" }},
+        "stat-5": { "type": "stat", "settings": { "label": "MATERIALS", "value": "8 TYPES" }},
+        "stat-6": { "type": "stat", "settings": { "label": "UPTIME", "value": "99.2%" }}
+      },
+      "block_order": ["stat-1","stat-2","stat-3","stat-4","stat-5","stat-6"]
+    },
+    "masonry-portfolio": {
       "type": "section-masonry-portfolio",
       "settings": {
-        "section_title": "The Workshop",
-        "section_subtitle": "Trophies, prototypes, and production runs — all born from filament and resin.",
-        "columns_desktop": 3,
-        "gap": 16,
-        "blur_amount": 8,
-        "overlay_bg_opacity": 75
+        "heading": "Featured Work",
+        "subheading": "A selection of recent prints — from functional prototypes to creative builds."
       },
       "blocks": {
-        "item_1": { "type": "portfolio_item", "settings": { "title": "Drone Housing v3", "tag": "Prototype", "layout": "tall", "material": "PETG", "print_time": "18h" } },
-        "item_2": { "type": "portfolio_item", "settings": { "title": "Architectural Model — Skyline", "tag": "Scale Model", "layout": "wide", "material": "PLA", "print_time": "42h" } },
-        "item_3": { "type": "portfolio_item", "settings": { "title": "Custom Trophy — Esports", "tag": "Trophy", "layout": "tall", "material": "Resin", "print_time": "8h" } },
-        "item_4": { "type": "portfolio_item", "settings": { "title": "Robotic Arm Joint", "tag": "Prototype", "layout": "square", "material": "PETG", "print_time": "6h" } },
-        "item_5": { "type": "portfolio_item", "settings": { "title": "PCB Enclosure — IoT Sensor", "tag": "Functional", "layout": "wide", "material": "ABS", "print_time": "4h" } },
-        "item_6": { "type": "portfolio_item", "settings": { "title": "Cosplay Helmet — Iron Series", "tag": "Trophy", "layout": "tall", "material": "PLA", "print_time": "36h" } }
+        "card-1": { "type": "card", "settings": { "title": "Drone Housing", "category": "Functional", "material_tag": "Nylon", "time_tag": "18h", "card_size": "tall" }},
+        "card-2": { "type": "card", "settings": { "title": "Architectural Model", "category": "Prototype", "material_tag": "Resin", "time_tag": "24h", "card_size": "wide" }},
+        "card-3": { "type": "card", "settings": { "title": "Custom Trophy", "category": "Creative", "material_tag": "PLA", "time_tag": "8h", "card_size": "square" }},
+        "card-4": { "type": "card", "settings": { "title": "Robotic Arm Joint", "category": "Functional", "material_tag": "PETG", "time_tag": "14h", "card_size": "square" }},
+        "card-5": { "type": "card", "settings": { "title": "PCB Enclosure", "category": "Functional", "material_tag": "PLA", "time_tag": "6h", "card_size": "wide" }},
+        "card-6": { "type": "card", "settings": { "title": "Cosplay Helmet", "category": "Creative", "material_tag": "PLA", "time_tag": "32h", "card_size": "tall" }}
       },
-      "block_order": ["item_1", "item_2", "item_3", "item_4", "item_5", "item_6"]
+      "block_order": ["card-1","card-2","card-3","card-4","card-5","card-6"]
+    },
+    "material-lab": {
+      "type": "section-material-lab",
+      "settings": {
+        "heading": "Material Lab",
+        "subheading": "Explore our materials. Compare strength, flexibility and detail resolution."
+      }
+    },
+    "process-flow": {
+      "type": "section-process-flow",
+      "settings": {
+        "heading": "How It Works",
+        "subheading": "From file to finished part in four simple steps."
+      }
+    },
+    "faq": {
+      "type": "section-faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "subheading": "Everything you need to know about our 3D printing service."
+      }
     }
   },
-  "order": ["hero", "portfolio"]
+  "order": [
+    "prototyper-bar",
+    "hero",
+    "trust-marquee",
+    "masonry-portfolio",
+    "material-lab",
+    "process-flow",
+    "faq"
+  ]
 }

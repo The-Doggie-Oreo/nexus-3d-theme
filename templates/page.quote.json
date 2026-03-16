@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-quote",
+      "settings": {
+        "heading": "Request a Quote",
+        "subheading": "Upload your 3D file and tell us what you need. We'll get back to you with a detailed quote within 24 hours."
+      }
+    }
+  },
+  "order": ["main"]
+}
